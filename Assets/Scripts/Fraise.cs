@@ -16,6 +16,9 @@ namespace Assets.Scripts
 	    
         // Update is called once per frame
         void Update () {
+
+            transform.Rotate(new Vector3(0,0,25));
+
             if (Time.time - _startTime >= (_timeBeforeDestroyed -2f))
             {
                 GetComponent<SpriteRenderer>().enabled = !GetComponent<SpriteRenderer>().enabled;

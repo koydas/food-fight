@@ -14,7 +14,7 @@ namespace Assets.Scripts
         [SerializeField]
         private GameObject _projectile;
         [SerializeField]
-        private Vector2 _velocityAjustment;
+        private float _velocityAjustment;
         [SerializeField]
         private float _minPower = 3.6f;
 
@@ -69,11 +69,10 @@ namespace Assets.Scripts
             {
                 var projectile = Instantiate(_projectile);
                 
-                //todo gérer l'angle
-                var x = _minPower + (_powerBar.value*_velocityAjustment.x);
-                var y = x * _angleBar.value;
+                projectile.transform.eulerAngles = new Vector3(0, 0, -_canonBody.eulerAngles.z + 7);
+                projectile.transform.GetComponent<Rigidbody2D>().freezeRotation = true;
                 
-                projectile.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(x, _velocityAjustment.y);
+                projectile.GetComponent<Rigidbody2D>().velocity = projectile.transform.right * _powerBar.value * _velocityAjustment;
             }
             else
             {
@@ -81,61 +80,7 @@ namespace Assets.Scripts
             }
 
         }
-
-
-        /*
         
-            todo try to adapt this code
-
-            if (Input.GetMouseButton(0))
-                {
-                    //get where user is tapping
-                    Vector3 location = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                    location.z = 0;
-                    //we will let the user pull the bird up to a maximum distance
-                    if (Vector3.Distance(location, SlingshotMiddleVector) > 1.5f)
-                    {
-                        //basic vector maths :)
-                        var maxPosition = (location - SlingshotMiddleVector).normalized * 1.5f + SlingshotMiddleVector;
-                        BirdToThrow.transform.position = maxPosition;
-                    }
-                    else
-                    {
-                        BirdToThrow.transform.position = location;
-                    }
-                    float distance = Vector3.Distance(SlingshotMiddleVector, BirdToThrow.transform.position);
-                    //display projected trajectory based on the distance
-                    DisplayTrajectoryLineRenderer2(distance);
-                }
-                else//user has removed the tap 
-                {
-                    SetTrajectoryLineRenderesActive(false);
-                    //throw the bird!!!
-                    TimeSinceThrown = Time.time;
-                    float distance = Vector3.Distance(SlingshotMiddleVector, BirdToThrow.transform.position);
-                    if (distance > 1)
-                    {
-                        SetSlingshotLineRenderersActive(false);
-                        slingshotState = SlingshotState.BirdFlying;
-                        ThrowBird(distance);
-                    }
-                    else//not pulled long enough, so reinitiate it
-                    {
-                        //distance/10 was found with trial and error :)
-                        //animate the bird to the wait position
-                        BirdToThrow.transform.positionTo(distance / 10, //duration
-                            BirdWaitPosition.transform.position). //final position
-                            setOnCompleteHandler((x) =>
-                        {
-                            x.complete();
-                            x.destroy();
-                            InitializeBird();
-                        });
-
-            
-            */
-
-
         private void ScoreDisplay()
         {
             Score = (int)(100 - _castle.Score);
