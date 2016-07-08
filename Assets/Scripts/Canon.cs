@@ -29,12 +29,15 @@ namespace Assets.Scripts
         private Castle _castle;
         private float _originalAngle;
         private Transform _canonBody;
-       // private Camera _mainCamera;
+        // private Camera _mainCamera;
+        [SerializeField]
         private GameObject _currentProjectile;
         private Vector3 _originalCameraPosition;
+        private LoadLevel _loadLevel ;
         // Use this for initialization
         void Start ()
         {
+            _loadLevel = FindObjectOfType<LoadLevel>();
             var scrollBars = FindObjectsOfType<Scrollbar>();
             
             foreach (var scrollBar in scrollBars)
@@ -56,13 +59,13 @@ namespace Assets.Scripts
             _originalAngle = _canonBody.eulerAngles.z;
 
             _castle = FindObjectOfType<Castle>();
-            //_mainCamera = Camera.main;
-            //_originalCameraPosition = _mainCamera.transform.position;
         }
 	
         // Update is called once per frame
-        private void Update()
+        void Update()
         {
+            if (!_loadLevel.IsLoaded) return;
+
             SetAngle();
             ScoreDisplay();
             WinOrLoseScreen();
@@ -71,21 +74,30 @@ namespace Assets.Scripts
 
         private void FollowProjectile()
         {
+            print(_currentProjectile);
             if (_currentProjectile != null)
             {
                 var followPosX = _currentProjectile.transform.position.x - _followDistance;
-                print(followPosX);
 
-                if (followPosX >= _minFollowPos)
+                if (followPosX >= _minFollowPos && followPosX <= 30)
                 {
-               //     Camera.main.transform.position = new Vector2(followPosX, Camera.main.transform.position.y);
+                    Camera.main.transform.position = Vector2.right* followPosX;
                 }
-               
             }
             else
             {
-              //  Camera.main.transform.position = _originalCameraPosition;
+                ReturnToCanon();
             }
+        }
+
+        private void ReturnToCanon()
+        {
+            //todo la caméra retourne trop vite au départ
+            if (Camera.main.transform.position.x > _originalCameraPosition.x)
+            {
+                Camera.main.transform.position += Vector3.left *.25f;
+            }
+            
         }
 
         private void SetAngle()
@@ -96,10 +108,12 @@ namespace Assets.Scripts
 
         public void Fire()
         {
+            if (!_loadLevel.IsLoaded) return;
+
             if (_projectile != null && _powerBar != null && _currentProjectile == null)
             {
                 _currentProjectile = Instantiate(_projectile, _canonBody.position, Quaternion.identity) as GameObject;
-
+                
                 if (_currentProjectile != null)
                 {
                     _currentProjectile.transform.eulerAngles = new Vector3(0, 0, -_canonBody.eulerAngles.z + 7);
@@ -111,11 +125,6 @@ namespace Assets.Scripts
                     _currentProjectile.GetComponent<Fraise>().IsLaunched = true;
                 }
             }
-            else
-            {
-                throw new Exception();
-            }
-
         }
         
         private void ScoreDisplay()

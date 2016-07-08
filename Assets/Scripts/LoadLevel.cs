@@ -10,7 +10,8 @@ namespace Assets.Scripts
         private float _cameraZoomSpeed = 0.05f;
         [SerializeField]
         private float _timeBeforeCameraZoomIn = 3;
-        
+
+        public bool IsLoaded;
 
         private float _originalCameraSize;
         private float _cameraMouvementPerFrame;
@@ -36,16 +37,23 @@ namespace Assets.Scripts
         }
 	
         // Update is called once per frame
-        void Update ()
+        private void Update()
         {
-            if (Time.time >= _timeBeforeCameraZoomIn && Camera.main.orthographicSize > _originalCameraSize)
+            if (!IsLoaded && Time.time >= _timeBeforeCameraZoomIn)
             {
-                Camera.main.orthographicSize -= _cameraZoomSpeed;
-            }
-            
-            if (Time.time >= _timeBeforeCameraZoomIn && Camera.main.transform.position.x > _originalCameraPosition)
-            {
-               Camera.main.transform.position += Vector3.left*_cameraMouvementPerFrame;
+                if (Camera.main.orthographicSize > _originalCameraSize)
+                {
+                    Camera.main.orthographicSize -= _cameraZoomSpeed;
+                }
+
+                if (Camera.main.transform.position.x > _originalCameraPosition)
+                {
+                    Camera.main.transform.position += Vector3.left*_cameraMouvementPerFrame;
+                }
+                else
+                {
+                    IsLoaded = true;
+                }
             }
         }
     }

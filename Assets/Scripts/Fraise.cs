@@ -12,15 +12,18 @@ namespace Assets.Scripts
         private bool _isRotate = true;
         
         private float _startTime;
+        private LoadLevel _loadLevel;
 
         // Use this for initialization
         void Start ()
         {
+            _loadLevel = FindObjectOfType<LoadLevel>();
             _startTime = Time.time;
         }
 	    
         // Update is called once per frame
         void Update () {
+            if (!_loadLevel.IsLoaded) return;
 
             if (_isRotate)
             {

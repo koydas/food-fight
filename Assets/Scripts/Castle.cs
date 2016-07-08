@@ -11,14 +11,18 @@ namespace Assets.Scripts
         private Text _scoreDisplay;
 
         private float _lastSecond = 0f;
+        private LoadLevel _loadLevel;
 
         void Start()
         {
+            _loadLevel = FindObjectOfType<LoadLevel>();
             _scoreDisplay.text = Score.ToString();
         }
 
         void Update()
         {
+            if (!_loadLevel.IsLoaded) return;
+
             if (Time.time >= _lastSecond + 1)
             {
                 _lastSecond = Time.time;
