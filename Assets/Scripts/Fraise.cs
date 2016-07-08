@@ -4,8 +4,13 @@ namespace Assets.Scripts
 {
     public class Fraise : MonoBehaviour
     {
+        public bool IsLaunched = false;
+
         [SerializeField]
         private float _timeBeforeDestroyed;
+        [SerializeField]
+        private bool _isRotate = true;
+        
         private float _startTime;
 
         // Use this for initialization
@@ -17,7 +22,10 @@ namespace Assets.Scripts
         // Update is called once per frame
         void Update () {
 
-            transform.Rotate(new Vector3(0,0,25));
+            if (_isRotate)
+            {
+                transform.Rotate(new Vector3(0, 0, 25));
+            }
 
             if (Time.time - _startTime >= (_timeBeforeDestroyed -2f))
             {
@@ -27,6 +35,14 @@ namespace Assets.Scripts
             if (Time.time - _startTime >= _timeBeforeDestroyed)
             {
                 Destroy(gameObject);
+            }
+        }
+
+        void OnCollisionEnter2D(Collision2D coll)
+        {
+            if (IsLaunched)
+            {
+                _isRotate = false;
             }
         }
     }
