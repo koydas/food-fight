@@ -1,4 +1,5 @@
 ﻿using System;
+using Assets.Scripts.Food;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -34,6 +35,7 @@ namespace Assets.Scripts
         private GameObject _currentProjectile;
         private Vector3 _originalCameraPosition;
         private LoadLevel _loadLevel ;
+        private bool _cameraInPlace;
         // Use this for initialization
         void Start ()
         {
@@ -74,7 +76,6 @@ namespace Assets.Scripts
 
         private void FollowProjectile()
         {
-            print(_currentProjectile);
             if (_currentProjectile != null)
             {
                 var followPosX = _currentProjectile.transform.position.x - _followDistance;
@@ -95,7 +96,11 @@ namespace Assets.Scripts
             //todo la caméra retourne trop vite au départ
             if (Camera.main.transform.position.x > _originalCameraPosition.x)
             {
-                Camera.main.transform.position += Vector3.left *.25f;
+                Camera.main.transform.position += Vector3.left*.25f;
+            }
+            else
+            {
+                _cameraInPlace = true;
             }
             
         }
@@ -110,7 +115,7 @@ namespace Assets.Scripts
         {
             if (!_loadLevel.IsLoaded) return;
 
-            if (_projectile != null && _powerBar != null && _currentProjectile == null)
+            if (_projectile != null && _powerBar != null && _currentProjectile == null && _cameraInPlace)
             {
                 _currentProjectile = Instantiate(_projectile, _canonBody.position, Quaternion.identity) as GameObject;
                 
@@ -123,6 +128,7 @@ namespace Assets.Scripts
 
                     //todo rendre plus generique
                     _currentProjectile.GetComponent<Fraise>().IsLaunched = true;
+                    _cameraInPlace = false;
                 }
             }
         }

@@ -65,7 +65,8 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Canon.cs" />
     <Compile Include="Assets\Scripts\Castle.cs" />
-    <Compile Include="Assets\Scripts\Fraise.cs" />
+    <Compile Include="Assets\Scripts\Food\Food.cs" />
+    <Compile Include="Assets\Scripts\Food\Fraise.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\LoadLevel.cs" />
   </ItemGroup>
