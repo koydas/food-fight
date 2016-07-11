@@ -3,6 +3,7 @@ using Assets.Scripts.Food;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace Assets.Scripts
 {
@@ -24,18 +25,23 @@ namespace Assets.Scripts
         private float _followDistance = 3;
         [SerializeField]
         private float _minFollowPos = 3;
+        [SerializeField]
+        private bool _ennemy;
+        [SerializeField]
+        [Range(1,4)]
+        private int _difficulty;
         
         private Scrollbar _powerBar;
         private Scrollbar _angleBar;
         private Castle _castle;
         private float _originalAngle;
         private Transform _canonBody;
-        // private Camera _mainCamera;
-        [SerializeField]
         private GameObject _currentProjectile;
         private Vector3 _originalCameraPosition;
         private LoadLevel _loadLevel ;
         private bool _cameraInPlace;
+        private bool _angleSet;
+       
         // Use this for initialization
         void Start ()
         {
@@ -56,7 +62,7 @@ namespace Assets.Scripts
                         throw new Exception("Unknown ScrollBar");
                 }
             }
-
+            
             _canonBody = transform.FindChild("Canon-body");
             _originalAngle = _canonBody.eulerAngles.z;
 
@@ -72,28 +78,40 @@ namespace Assets.Scripts
             ScoreDisplay();
             WinOrLoseScreen();
             FollowProjectile();
+            EnnemyShots();
+        }
+
+        private void EnnemyShots()
+        {
+            if (_ennemy)
+            {
+                Fire();
+            }
         }
 
         private void FollowProjectile()
         {
-            if (_currentProjectile != null)
+            if (!_ennemy)
             {
-                var followPosX = _currentProjectile.transform.position.x - _followDistance;
 
-                if (followPosX >= _minFollowPos && followPosX <= 30)
+                if (_currentProjectile != null)
                 {
-                    Camera.main.transform.position = Vector2.right* followPosX;
+                    var followPosX = _currentProjectile.transform.position.x - _followDistance;
+
+                    if (followPosX >= _minFollowPos && followPosX <= 30)
+                    {
+                        Camera.main.transform.position = Vector2.right*followPosX;
+                    }
                 }
-            }
-            else
-            {
-                ReturnToCanon();
+                else
+                {
+                    ReturnToCanon();
+                }
             }
         }
 
         private void ReturnToCanon()
         {
-            //todo la caméra retourne trop vite au départ
             if (Camera.main.transform.position.x > _originalCameraPosition.x)
             {
                 Camera.main.transform.position += Vector3.left*.25f;
@@ -102,18 +120,42 @@ namespace Assets.Scripts
             {
                 _cameraInPlace = true;
             }
-            
         }
 
         private void SetAngle()
         {
-            float rotateValue = _originalAngle + _angleBar.value * (-_maximumAngle);
+            if (_angleSet) return;
+            
+            float rotateValue = _ennemy ? Random.Range(0, -_maximumAngle) : _originalAngle + _angleBar.value * (-_maximumAngle);
+            _angleSet = true;
             _canonBody.eulerAngles = new Vector3(0,0,rotateValue);
         }
 
         public void Fire()
         {
             if (!_loadLevel.IsLoaded) return;
+
+            if (_projectile != null && _currentProjectile == null && _ennemy && _angleSet)
+            {
+                _currentProjectile = Instantiate(_projectile, _canonBody.position, Quaternion.identity) as GameObject;
+
+                if (_currentProjectile != null)
+                {
+                    _currentProjectile.transform.eulerAngles = new Vector3(0, 0, _canonBody.eulerAngles.z + 7);
+                    _currentProjectile.transform.GetComponent<Rigidbody2D>().freezeRotation = true;
+
+                    //todo rendre la puissance plus précise
+                    var puss = _currentProjectile.transform.right*Random.Range(0.3f, -0.8f)*_velocityAjustment;
+                    _currentProjectile.GetComponent<Rigidbody2D>().velocity = _currentProjectile.transform.right * Random.Range(0, -1f) * _velocityAjustment;
+
+                    //todo rendre plus generique
+                    _currentProjectile.GetComponent<Fraise>().IsLaunched = true;
+
+                    _angleSet = false;
+                }
+
+                return;
+            }
 
             if (_projectile != null && _powerBar != null && _currentProjectile == null && _cameraInPlace)
             {
