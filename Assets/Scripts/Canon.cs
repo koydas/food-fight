@@ -124,7 +124,7 @@ namespace Assets.Scripts
 
         private void SetAngle()
         {
-            if (_angleSet) return;
+			if (_angleSet && _ennemy) return;
             
             float rotateValue = _ennemy ? Random.Range(0, -_maximumAngle) : _originalAngle + _angleBar.value * (-_maximumAngle);
             _angleSet = true;
