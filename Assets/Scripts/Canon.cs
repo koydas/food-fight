@@ -137,7 +137,7 @@ namespace Assets.Scripts
 
             if (_projectile != null && _currentProjectile == null && _ennemy && _angleSet)
             {
-                _currentProjectile = Instantiate(_projectile, _canonBody.position, Quaternion.identity) as GameObject;
+				_currentProjectile = Instantiate(_projectile, new Vector3(_canonBody.position.x, _canonBody.position.y, _projectile.transform.position.z), Quaternion.identity) as GameObject;
 
                 if (_currentProjectile != null)
                 {
@@ -159,7 +159,7 @@ namespace Assets.Scripts
 
             if (_projectile != null && _powerBar != null && _currentProjectile == null && _cameraInPlace)
             {
-                _currentProjectile = Instantiate(_projectile, _canonBody.position, Quaternion.identity) as GameObject;
+				_currentProjectile = Instantiate(_projectile, new Vector3(_canonBody.position.x, _canonBody.position.y, _projectile.transform.position.z), Quaternion.identity) as GameObject;
                 
                 if (_currentProjectile != null)
                 {
