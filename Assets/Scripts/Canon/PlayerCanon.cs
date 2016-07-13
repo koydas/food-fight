@@ -56,8 +56,8 @@ namespace Assets.Scripts.Canon
         
         protected override void SetAngle()
         {
-            float rangeAngle = MinimumAngle - MaximumAngle;
-            float rotateValue = MinimumAngle + (rangeAngle * _angleBar.value);
+            float rangeAngle = MaximumAngle - MinimumAngle;
+            float rotateValue = -MinimumAngle - (rangeAngle * _angleBar.value);
             
             CanonBody.eulerAngles = new Vector3(0, 0, rotateValue);
         }
