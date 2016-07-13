@@ -24,7 +24,7 @@ namespace Assets.Scripts.Canon
         protected Transform CanonBody;
         protected GameObject CurrentProjectile;
         protected LoadLevel LoadLevel ;
-       
+        
         public virtual void Start ()
         {
             LoadLevel = FindObjectOfType<LoadLevel>();
@@ -42,5 +42,6 @@ namespace Assets.Scripts.Canon
         
         protected abstract void SetAngle();
         public abstract void Fire();
+        
     }
 }

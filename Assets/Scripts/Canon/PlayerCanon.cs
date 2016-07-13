@@ -9,12 +9,19 @@ namespace Assets.Scripts.Canon
         [Header("Camera")]
         [SerializeField]
         private float _followDistance = 3;
+        [SerializeField]
+        private float _maxCameraFollow = 30;
 
         private Scrollbar _powerBar;
         private Scrollbar _angleBar;
 
         private bool _cameraInPlace;
         private Vector3 _originalCameraPosition;
+
+        public void Awake()
+        {
+            _originalCameraPosition = Camera.main.transform.position;
+        }
 
         public override void Start()
         {
@@ -36,13 +43,14 @@ namespace Assets.Scripts.Canon
                         throw new Exception("Unknown ScrollBar");
                 }
             }
-
-            _originalCameraPosition = Camera.main.transform.position;
         }
 
         public override void Update()
         {
+            if (!LoadLevel.IsLoaded) return;
+
             base.Update();
+            
             FollowProjectile();
         }
         
@@ -87,7 +95,7 @@ namespace Assets.Scripts.Canon
                 var followPosX = CurrentProjectile.transform.position.x - _followDistance;
 
                 //todo possible bogue de la position originale
-                if (followPosX >= _originalCameraPosition.x && followPosX <= 30)
+                if (followPosX >= _originalCameraPosition.x && followPosX <= _maxCameraFollow)
                 {
                     Camera.main.transform.position = Vector2.right * followPosX;
                 }

@@ -20,9 +20,7 @@ namespace Assets.Scripts.Canon
 
             float rangeAngle = MaximumAngle - MinimumAngle;
             float rotateValue = -MinimumAngle - (rangeAngle * Random.Range(0f, 1f));
-
-            print(rotateValue);
-
+            
             CanonBody.eulerAngles = new Vector3(0, 0, rotateValue);
             AngleSet = true;
         }
