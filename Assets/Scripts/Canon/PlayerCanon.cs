@@ -33,6 +33,7 @@ namespace Assets.Scripts.Canon
             {
                 switch (scrollBar.name)
                 {
+                    //todo mettre dans un enum
                     case "Power":
                         _powerBar = scrollBar;
                         break;
@@ -56,35 +57,17 @@ namespace Assets.Scripts.Canon
         
         protected override void SetAngle()
         {
-            float rangeAngle = MaximumAngle - MinimumAngle;
-            float rotateValue = -MinimumAngle - (rangeAngle * _angleBar.value);
-            
-            CanonBody.eulerAngles = new Vector3(0, 0, rotateValue);
+            SetAngle(_angleBar.value);
         }
-
-        //todo revoir pour mettre ça dans la classe de base
+        
         public override void Fire()
         {
             if (!LoadLevel.IsLoaded) return;
 
             if (Projectile != null && _powerBar != null && CurrentProjectile == null && _cameraInPlace)
             {
-                CurrentProjectile = Instantiate(Projectile, new Vector3(CanonBody.position.x, CanonBody.position.y, Projectile.transform.position.z), Quaternion.identity) as GameObject;
-
-                if (CurrentProjectile != null)
-                {
-                    CurrentProjectile.transform.eulerAngles = new Vector3(0, 0, -CanonBody.eulerAngles.z + 7);
-                    CurrentProjectile.transform.GetComponent<Rigidbody2D>().freezeRotation = true;
-
-                    float rangePower = MaximumPower - MinimumPower;
-                    float powerVelocity = MinimumPower + (rangePower * _powerBar.value);
-
-                    CurrentProjectile.GetComponent<Rigidbody2D>().velocity = CurrentProjectile.transform.right * powerVelocity;
-
-                    //todo rendre plus generique
-                    CurrentProjectile.GetComponent<Food.Food>().IsLaunched = true;
-                    _cameraInPlace = false;
-                }
+                Fire(_powerBar.value, false);
+                _cameraInPlace = false;
             }
         }
 
@@ -93,8 +76,7 @@ namespace Assets.Scripts.Canon
             if (CurrentProjectile != null)
             {
                 var followPosX = CurrentProjectile.transform.position.x - _followDistance;
-
-                //todo possible bogue de la position originale
+                
                 if (followPosX >= _originalCameraPosition.x && followPosX <= _maxCameraFollow)
                 {
                     Camera.main.transform.position = Vector2.right * followPosX;
