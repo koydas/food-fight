@@ -3,6 +3,8 @@
     enum EnumDirection
     {
         Up,
-        Down
+        Down,
+        Left,
+        Right
     }
 }

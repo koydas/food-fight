@@ -74,7 +74,7 @@ namespace Assets.Scripts.Canon
             {
                 _powerBar.value += speed;
             }
-            else
+            else if (_powerScrollBarDirection == EnumDirection.Down)
             {
                 _powerBar.value -= speed;
             }
