@@ -18,6 +18,9 @@ namespace Assets.Scripts.Canon
         private bool _cameraInPlace;
         private Vector3 _originalCameraPosition;
 
+        private bool _fireButtonPushedOnce;
+        private EnumDirection _powerScrollBarDirection = EnumDirection.Up;
+
         public void Awake()
         {
             _originalCameraPosition = Camera.main.transform.position;
@@ -51,7 +54,8 @@ namespace Assets.Scripts.Canon
             if (!LoadLevel.IsLoaded) return;
 
             base.Update();
-            
+
+            PowerBarUpAndDown();
             FollowProjectile();
         }
         
@@ -59,16 +63,56 @@ namespace Assets.Scripts.Canon
         {
             SetAngle(_angleBar.value);
         }
-        
+
+        private void PowerBarUpAndDown()
+        {
+            if (!_fireButtonPushedOnce) return;
+
+            var speed = .025f;
+
+            if (_powerScrollBarDirection == EnumDirection.Up)
+            {
+                _powerBar.value += speed;
+            }
+            else
+            {
+                _powerBar.value -= speed;
+            }
+
+            if (_powerBar.value == 0)
+            {
+                _powerScrollBarDirection = EnumDirection.Up;
+            }
+            else if (_powerBar.value == 1)
+            {
+                _powerScrollBarDirection = EnumDirection.Down;
+
+            }
+        }
+
         public override void Fire()
         {
             if (!LoadLevel.IsLoaded) return;
+
+            if (!_fireButtonPushedOnce)
+            {
+
+                _fireButtonPushedOnce = true;
+                return;
+            }
 
             if (Projectile != null && _powerBar != null && CurrentProjectile == null && _cameraInPlace)
             {
                 Fire(_powerBar.value, false);
                 _cameraInPlace = false;
+                ResetPowerBar();
             }
+        }
+
+        private void ResetPowerBar()
+        {
+            _fireButtonPushedOnce = false;
+            _powerBar.value = 0;
         }
 
         private void FollowProjectile()
