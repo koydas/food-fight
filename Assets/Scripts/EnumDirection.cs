@@ -1,6 +1,6 @@
-﻿namespace Assets.Scripts.Canon
+﻿namespace Assets.Scripts
 {
-    enum EnumDirection
+    public enum EnumDirection
     {
         Up,
         Down,

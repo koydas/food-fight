@@ -67,7 +67,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Canon\Canon.cs" />
     <Compile Include="Assets\Scripts\Canon\EnnemyCanon.cs" />
-    <Compile Include="Assets\Scripts\Canon\EnumDirection.cs" />
+    <Compile Include="Assets\Scripts\EnumDirection.cs" />
     <Compile Include="Assets\Scripts\Canon\PlayerCanon.cs" />
     <Compile Include="Assets\Scripts\Castle.cs" />
     <Compile Include="Assets\Scripts\Characters\HealthBar.cs" />

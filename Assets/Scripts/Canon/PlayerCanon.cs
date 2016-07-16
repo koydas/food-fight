@@ -112,7 +112,6 @@ namespace Assets.Scripts.Canon
         private void ResetPowerBar()
         {
             _fireButtonPushedOnce = false;
-            _powerBar.value = 0;
         }
 
         private void FollowProjectile()
@@ -140,6 +139,11 @@ namespace Assets.Scripts.Canon
             }
             else
             {
+                if (!_cameraInPlace)
+                {
+                    _powerBar.value = 0;
+                }
+
                 _cameraInPlace = true;
             }
         }
