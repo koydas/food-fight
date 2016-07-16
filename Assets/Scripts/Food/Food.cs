@@ -4,6 +4,9 @@ namespace Assets.Scripts.Food
 {
     public class Food : MonoBehaviour
     {
+        public int Damage = 10;
+
+        [HideInInspector]
         public bool IsLaunched = false;
 
         [SerializeField]

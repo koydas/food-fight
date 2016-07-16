@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\Canon\EnumDirection.cs" />
     <Compile Include="Assets\Scripts\Canon\PlayerCanon.cs" />
     <Compile Include="Assets\Scripts\Castle.cs" />
+    <Compile Include="Assets\Scripts\Characters\HealthBar.cs" />
     <Compile Include="Assets\Scripts\Characters\SousChef.cs" />
     <Compile Include="Assets\Scripts\Constant.cs" />
     <Compile Include="Assets\Scripts\Food\Food.cs" />
