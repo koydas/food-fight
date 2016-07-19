@@ -52,14 +52,14 @@ namespace Assets.Scripts.Canon
             CanonBody.eulerAngles = new Vector3(0, 0, rotateValue);
         }
 
-        protected bool Fire(float power, bool isReversed)
+        protected bool Fire(float power, bool isEnnemy)
         {
             CurrentProjectile = Instantiate(Projectile, new Vector3(CanonBody.position.x, CanonBody.position.y, Projectile.transform.position.z), Quaternion.identity) as GameObject;
 
             if (CurrentProjectile != null)
             {
 
-                float z = isReversed ? CanonBody.eulerAngles.z : -CanonBody.eulerAngles.z;
+                float z = isEnnemy ? CanonBody.eulerAngles.z : -CanonBody.eulerAngles.z;
 
                 CurrentProjectile.transform.eulerAngles = new Vector3(0, 0, z + 7);
                 CurrentProjectile.transform.GetComponent<Rigidbody2D>().freezeRotation = true;
@@ -67,9 +67,14 @@ namespace Assets.Scripts.Canon
                 float rangePower = MaximumPower - MinimumPower;
                 float powerVelocity = MinimumPower + (rangePower * power);
 
-                if (isReversed)
+                if (isEnnemy)
                 {
                     powerVelocity *= -1;
+                    CurrentProjectile.layer = Constant.Ennemy;
+                }
+                else
+                {
+                    CurrentProjectile.layer = Constant.Player;
                 }
 
                 CurrentProjectile.GetComponent<Rigidbody2D>().velocity = CurrentProjectile.transform.right * powerVelocity;

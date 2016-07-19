@@ -34,7 +34,7 @@ namespace Assets.Scripts.Food
 
         void OnCollisionEnter2D(Collision2D coll)
         {
-            if (IsLaunched)
+            if (IsLaunched && coll.gameObject.tag != Constant.PlatformLimiter)
             {
                 _rotationAllowed = false;
                 Destroy(gameObject);
