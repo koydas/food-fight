@@ -23,7 +23,7 @@ namespace Assets.Scripts.Canon
 
         public void Awake()
         {
-            _originalCameraPosition = Camera.main.transform.position;
+            _originalCameraPosition = UnityEngine.Camera.main.transform.position;
         }
 
         public override void Start()
@@ -89,7 +89,7 @@ namespace Assets.Scripts.Canon
 
             }
         }
-
+        
         public override void Fire()
         {
             if (!LoadLevel.IsLoaded) return;
@@ -122,7 +122,7 @@ namespace Assets.Scripts.Canon
                 
                 if (followPosX >= _originalCameraPosition.x && followPosX <= _maxCameraFollow)
                 {
-                    Camera.main.transform.position = Vector2.right * followPosX;
+                    UnityEngine.Camera.main.transform.position = Vector2.right * followPosX;
                 }
             }
             else
@@ -133,9 +133,16 @@ namespace Assets.Scripts.Canon
 
         private void ReturnToCanon()
         {
-            if (Camera.main.transform.position.x > _originalCameraPosition.x)
+            //todo pouvoir ajuster la vitesse
+            float ajustmentBuffer = -.2f;
+
+            if (UnityEngine.Camera.main.transform.position.x > _originalCameraPosition.x - ajustmentBuffer)
             {
-                Camera.main.transform.position += Vector3.left * .25f;
+                UnityEngine.Camera.main.transform.position += Vector3.left * .25f;
+            }
+            else if (UnityEngine.Camera.main.transform.position.x < _originalCameraPosition.x + ajustmentBuffer)
+            {
+                UnityEngine.Camera.main.transform.position -= Vector3.left * .25f;
             }
             else
             {
