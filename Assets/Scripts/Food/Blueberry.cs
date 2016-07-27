@@ -1,6 +1,6 @@
 ﻿namespace Assets.Scripts.Food
 {
-    public class Fraise : Food
+    public class Blueberry : Food
     {
      
     }
