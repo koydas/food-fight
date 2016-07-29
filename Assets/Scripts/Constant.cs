@@ -4,6 +4,7 @@
     {
         public const string PlatformLimiter = "Platform Limiter";
         public const string FoodButton = "Food Button"; 
+        public const string Floor = "Floor"; 
         public const int Ennemy = 9;
         public const int Player = 8;
     }

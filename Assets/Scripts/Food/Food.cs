@@ -10,7 +10,11 @@ namespace Assets.Scripts.Food
         public bool IsLaunched = false;
 
         [SerializeField]
-        private float _timeBeforeDestroyed;
+        [Range(0,9)]
+        private int _nbOfLeaps;
+        [SerializeField]
+        private float _leapPower = 2.5f;
+
         [SerializeField]
         private bool _rotationAllowed = true;
         
@@ -36,6 +40,25 @@ namespace Assets.Scripts.Food
         {
             if (IsLaunched && coll.gameObject.tag != Constant.PlatformLimiter)
             {
+                //bounce on the floor
+                if (coll.gameObject.tag == Constant.Floor)
+                {
+                    _rotationAllowed = false;
+                    if (_nbOfLeaps > 0)
+                    {
+                        GetComponent<Rigidbody2D>().velocity = new Vector2(_leapPower, _leapPower);
+                        _leapPower *= .5f;
+                        _nbOfLeaps--;
+                    }
+                    else
+                    {
+                        Destroy(gameObject);
+
+                    }
+
+                    return;
+                }
+
                 _rotationAllowed = false;
                 Destroy(gameObject);
             }
