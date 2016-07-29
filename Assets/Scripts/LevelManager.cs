@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 namespace Assets.Scripts
 {
 	public class LevelManager : MonoBehaviour {
-		public void NewGame()
+		public void GamePlay()
         {
             SceneManager.LoadScene("GamePlay");
         }
@@ -19,7 +19,12 @@ namespace Assets.Scripts
 			SceneManager.LoadScene("Options");
 		}
 
-		public void QuitApplication()
+        public void SavedGamesScreen()
+        {
+            SceneManager.LoadScene("SavedGames");
+        }
+
+        public void QuitApplication()
         {
             Application.Quit();
         }
