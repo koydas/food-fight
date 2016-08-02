@@ -2,9 +2,11 @@
 
 namespace Assets.Scripts.Food
 {
-    public class Food : MonoBehaviour
+    public abstract class Food : MonoBehaviour
     {
         public int Damage = 10;
+
+        public abstract EnumFood EnumFood { get; set; }
 
         [HideInInspector]
         public bool IsLaunched = false;

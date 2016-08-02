@@ -1,13 +1,12 @@
 ﻿namespace Assets.Scripts.Food
 {
-    public class Blueberry : Food
+    public class Pomegranate : Food
     {
-
         public override EnumFood EnumFood
         {
             get
             {
-                return EnumFood.Blueberry;
+                return EnumFood.Pomegranate;
             }
             set { }
         }

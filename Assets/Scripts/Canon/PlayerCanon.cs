@@ -1,4 +1,5 @@
 ﻿using System;
+using Assets.Scripts.Food;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -54,6 +55,8 @@ namespace Assets.Scripts.Canon
             if (!LoadLevel.IsLoaded) return;
 
             base.Update();
+
+            Projectile = FoodHelper.CurrentSelectedFood();
 
             PowerBarUpAndDown();
             FollowProjectile();
@@ -154,5 +157,6 @@ namespace Assets.Scripts.Canon
                 _cameraInPlace = true;
             }
         }
+
     }
 }
