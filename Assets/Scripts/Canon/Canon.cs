@@ -56,8 +56,6 @@ namespace Assets.Scripts.Canon
 
         protected bool Fire(float power, bool isEnnemy)
         {
-            //print(Projectile);
-
             CurrentProjectile = Instantiate(Projectile, new Vector3(CanonBody.position.x, CanonBody.position.y, Projectile.transform.position.z), Quaternion.identity) as GameObject;
 
             if (CurrentProjectile != null)
@@ -90,17 +88,5 @@ namespace Assets.Scripts.Canon
 
             return false;
         }
-
-        //todo trouver une façon plus propre de changer le projectile
-        //private Food.Food ChangeProjectile(EnumFood food)
-        //{
-        //    switch (food)
-        //    {
-                
-
-        //        default:
-        //            throw new UnityException("Enum not supported");
-        //    }
-        //}
     }
 }

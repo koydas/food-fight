@@ -1,5 +1,6 @@
 ﻿using System;
 using Assets.Scripts.Food;
+using Assets.Scripts.Food.Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,7 +20,8 @@ namespace Assets.Scripts.Canon
         private bool _cameraInPlace;
         private Vector3 _originalCameraPosition;
 
-        private bool _fireButtonPushedOnce;
+        public EnumCanonState CanonState;
+
         private EnumDirection _powerScrollBarDirection = EnumDirection.Up;
 
         public void Awake()
@@ -69,7 +71,7 @@ namespace Assets.Scripts.Canon
 
         private void PowerBarUpAndDown()
         {
-            if (!_fireButtonPushedOnce) return;
+            if (CanonState != EnumCanonState.PowerbarMoving) return;
 
             var speed = .025f;
 
@@ -97,26 +99,36 @@ namespace Assets.Scripts.Canon
         {
             if (!LoadLevel.IsLoaded) return;
 
-            if (!_fireButtonPushedOnce)
+            switch (CanonState)
             {
+                case EnumCanonState.Idle:
+                    CanonState = EnumCanonState.PowerbarMoving;
+                    break;
 
-                _fireButtonPushedOnce = true;
-                return;
-            }
+                case EnumCanonState.PowerbarMoving:
+                    if (Projectile != null && _powerBar != null && CurrentProjectile == null && _cameraInPlace)
+                    {
+                        Fire(_powerBar.value, false);
+                        _cameraInPlace = false;
+                        CanonState = EnumCanonState.Launched;
+                    }
+                    break;
 
-            if (Projectile != null && _powerBar != null && CurrentProjectile == null && _cameraInPlace)
-            {
-                Fire(_powerBar.value, false);
-                _cameraInPlace = false;
-                ResetPowerBar();
+                case EnumCanonState.Launched:
+                    UseSecondAbility();
+                    break;
             }
         }
 
-        private void ResetPowerBar()
+        private void UseSecondAbility()
         {
-            _fireButtonPushedOnce = false;
+            var projectile = Projectile.GetComponent<ISecondAbility>();
+            if (projectile != null)
+            {
+                projectile.UseSecondAbility();
+            }
         }
-
+        
         private void FollowProjectile()
         {
             if (CurrentProjectile != null)
@@ -152,6 +164,7 @@ namespace Assets.Scripts.Canon
                 if (!_cameraInPlace)
                 {
                     _powerBar.value = 0;
+                    CanonState = EnumCanonState.Idle;
                 }
 
                 _cameraInPlace = true;
