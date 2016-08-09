@@ -40,7 +40,7 @@ namespace Assets.Scripts.Food
 
         void OnCollisionEnter2D(Collision2D coll)
         {
-            if (IsLaunched && coll.gameObject.tag != Constant.PlatformLimiter)
+            if (IsLaunched && coll.gameObject.tag != Constant.PlatformLimiter && !coll.gameObject.GetComponent<Food>())
             {
                 //bounce on the floor
                 if (coll.gameObject.tag == Constant.Floor)
@@ -55,7 +55,6 @@ namespace Assets.Scripts.Food
                     else
                     {
                         Destroy(gameObject);
-
                     }
 
                     return;

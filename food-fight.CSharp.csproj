@@ -83,6 +83,8 @@
     <Compile Include="Assets\Scripts\Food\Strawberry.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\LoadLevel.cs" />
+    <Compile Include="Assets\Scripts\MinMaxSliderAttribute.cs" />
+    <Compile Include="Assets\Scripts\MinMaxSliderDrawer.cs" />
     <Compile Include="Assets\Scripts\UI\FoodButton.cs" />
     <Compile Include="Assets\Scripts\UI\FoodButtonHandler.cs" />
   </ItemGroup>

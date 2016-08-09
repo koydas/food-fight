@@ -116,16 +116,21 @@ namespace Assets.Scripts.Canon
 
                 case EnumCanonState.Launched:
                     UseSecondAbility();
+                    CanonState = EnumCanonState.Idle;
                     break;
             }
         }
 
         private void UseSecondAbility()
         {
-            var projectile = Projectile.GetComponent<ISecondAbility>();
+            var projectile = CurrentProjectile.GetComponent<ISecondAbility>();
             if (projectile != null)
             {
                 projectile.UseSecondAbility();
+                if (projectile.SecondSkillDestroyObject)
+                {
+                    Destroy(CurrentProjectile);
+                }
             }
         }
         
