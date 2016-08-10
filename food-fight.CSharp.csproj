@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\Food\Food.cs" />
     <Compile Include="Assets\Scripts\Food\FoodHelper.cs" />
     <Compile Include="Assets\Scripts\Food\Interfaces\IDot.cs" />
+    <Compile Include="Assets\Scripts\Food\Interfaces\IFragments.cs" />
     <Compile Include="Assets\Scripts\Food\Interfaces\ISecondAbility.cs" />
     <Compile Include="Assets\Scripts\Food\Pomegranate.cs" />
     <Compile Include="Assets\Scripts\Food\PomegranateFragment.cs" />

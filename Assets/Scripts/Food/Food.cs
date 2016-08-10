@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Food.Interfaces;
+using UnityEngine;
 
 namespace Assets.Scripts.Food
 {
@@ -44,8 +45,8 @@ namespace Assets.Scripts.Food
         }
 
         void OnCollisionEnter2D(Collision2D coll)
-        {
-            if (IsLaunched && coll.gameObject.tag != Constant.PlatformLimiter && !coll.gameObject.GetComponent<Food>())
+        {            
+            if (IsLaunched && coll.gameObject.tag != Constant.PlatformLimiter && coll.gameObject.tag != Constant.Fragment)
             {
                 //bounce on the floor
                 if (coll.gameObject.tag == Constant.Floor)

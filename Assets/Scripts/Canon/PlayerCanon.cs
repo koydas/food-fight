@@ -116,7 +116,7 @@ namespace Assets.Scripts.Canon
 
                 case EnumCanonState.Launched:
                     UseSecondAbility();
-                    CanonState = EnumCanonState.Idle;
+                    CanonState = EnumCanonState.FollowFragment;
                     break;
             }
         }
@@ -130,6 +130,12 @@ namespace Assets.Scripts.Canon
                 if (projectile.SecondSkillDestroyObject)
                 {
                     Destroy(CurrentProjectile);
+
+                    var fragments = CurrentProjectile.GetComponent<IFragments>();
+                    if (fragments != null)
+                    {
+                        CurrentProjectile = fragments.FragmentToFollow;
+                    }
                 }
             }
         }

@@ -5,6 +5,7 @@
         Idle,
         PowerbarMoving,
         Launched,
-        SecondAbility
+        SecondAbility,
+        FollowFragment
     }
 }

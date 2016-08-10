@@ -3,10 +3,15 @@ using UnityEngine;
 
 namespace Assets.Scripts.Food
 {
-    public class Pomegranate : Food, ISecondAbility
+    public class Pomegranate : Food, ISecondAbility, IFragments
     {
         [SerializeField]
         private bool _secondSkillDestroyObject ;
+        [SerializeField]
+        private GameObject _fragment;
+        [SerializeField]
+        private int _nbOfFragments;
+
         public bool SecondSkillDestroyObject
         {
             get { return _secondSkillDestroyObject; }
@@ -14,10 +19,20 @@ namespace Assets.Scripts.Food
 
         }
 
-        public GameObject Fragment;
-        
-        public int NbOfFragments;
-        
+        public GameObject Fragment
+        {
+            get { return _fragment; }
+            set { _fragment = value; }
+        }
+
+        public GameObject FragmentToFollow { get; set; }
+
+        public int NbOfFragments
+        {
+            get { return _nbOfFragments; }
+            set { _nbOfFragments = value; }
+        }
+
         public override EnumFood EnumFood
         {
             get
@@ -30,26 +45,28 @@ namespace Assets.Scripts.Food
 
         public void UseSecondAbility()
         {
+            var yTotal = 15;
+            var yDiff = yTotal / (float)NbOfFragments;
+            var yStart = 10;
+
             for (int i = 0; i < NbOfFragments; i++)
             {
+                var yVel = yStart - yDiff*i;
                 var frag = Instantiate(Fragment, transform.position, Quaternion.identity) as GameObject;
 
                 if (frag != null)
                 {
-                    var xx = (int) Mathf.Round(Random.Range(0f, 1f));
+                    if (FragmentToFollow == null)
+                    {
+                        FragmentToFollow = frag;
+                    }
 
-                    var isPositive = xx != 0;
-
-                    var randX = Random.Range(5f, 7f);
-                    var randY = Random.Range(5f, 7f);
-
-                    var velX = isPositive ? randX : -randX;
-                    var velY = isPositive ? randY : -randY;
-
-                    frag.GetComponent<Rigidbody2D>().velocity = new Vector2(velX, velY);
+                    frag.GetComponent<Rigidbody2D>().velocity = new Vector2(10, yVel);
                     frag.GetComponent<PomegranateFragment>().IsLaunched = true;
                 }
             }
         }
+
+        
     }
 }
