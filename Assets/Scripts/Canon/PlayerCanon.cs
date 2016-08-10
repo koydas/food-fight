@@ -17,13 +17,15 @@ namespace Assets.Scripts.Canon
         private Scrollbar _powerBar;
         private Scrollbar _angleBar;
 
-        private bool _cameraInPlace;
         private Vector3 _originalCameraPosition;
 
         public EnumCanonState CanonState;
 
         private EnumDirection _powerScrollBarDirection = EnumDirection.Up;
 
+        private float _timeBeforeReturnToCanon = 1.5f;
+        private float? _timeStart;
+        
         public void Awake()
         {
             _originalCameraPosition = UnityEngine.Camera.main.transform.position;
@@ -106,10 +108,9 @@ namespace Assets.Scripts.Canon
                     break;
 
                 case EnumCanonState.PowerbarMoving:
-                    if (Projectile != null && _powerBar != null && CurrentProjectile == null && _cameraInPlace)
+                    if (Projectile != null && _powerBar != null && CurrentProjectile == null)
                     {
                         Fire(_powerBar.value, false);
-                        _cameraInPlace = false;
                         CanonState = EnumCanonState.Launched;
                     }
                     break;
@@ -123,6 +124,11 @@ namespace Assets.Scripts.Canon
 
         private void UseSecondAbility()
         {
+            if (CurrentProjectile == null)
+            {
+                return;
+            }
+
             var projectile = CurrentProjectile.GetComponent<ISecondAbility>();
             if (projectile != null)
             {
@@ -151,15 +157,23 @@ namespace Assets.Scripts.Canon
                     UnityEngine.Camera.main.transform.position = Vector2.right * followPosX;
                 }
             }
-            else
+            else if (CanonState == EnumCanonState.FollowFragment || CanonState == EnumCanonState.Launched || CanonState == EnumCanonState.ReturnToCanon)
             {
-                ReturnToCanon();
+                if (!_timeStart.HasValue)
+                {
+                    _timeStart = Time.time;
+                }
+
+                if (Time.time > _timeStart.Value + _timeBeforeReturnToCanon)
+                {
+                    CanonState = EnumCanonState.ReturnToCanon;
+                    ReturnToCanon();
+                }
             }
         }
 
         private void ReturnToCanon()
         {
-            //todo pouvoir ajuster la vitesse
             float ajustmentBuffer = -.2f;
 
             if (UnityEngine.Camera.main.transform.position.x > _originalCameraPosition.x - ajustmentBuffer)
@@ -172,13 +186,8 @@ namespace Assets.Scripts.Canon
             }
             else
             {
-                if (!_cameraInPlace)
-                {
-                    _powerBar.value = 0;
-                    CanonState = EnumCanonState.Idle;
-                }
-
-                _cameraInPlace = true;
+                _timeStart = null;
+                CanonState = EnumCanonState.Idle;
             }
         }
 

@@ -6,6 +6,7 @@
         PowerbarMoving,
         Launched,
         SecondAbility,
-        FollowFragment
+        FollowFragment,
+        ReturnToCanon
     }
 }
