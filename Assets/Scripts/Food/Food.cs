@@ -18,7 +18,7 @@ namespace Assets.Scripts.Food
         private float _leapPower = 2.5f;
 
         [SerializeField]
-        private bool _rotationAllowed = true;
+        protected bool RotationAllowed = true;
         
         private LoadLevel _loadLevel;
 
@@ -32,10 +32,15 @@ namespace Assets.Scripts.Food
         void Update () {
             if (!_loadLevel.IsLoaded) return;
 
-            if (_rotationAllowed)
+            if (RotationAllowed)
             {
-                transform.Rotate(new Vector3(0, 0, 25));
+                Rotation();
             }
+        }
+
+        protected virtual void Rotation()
+        {
+            transform.Rotate(new Vector3(0, 0, 25));
         }
 
         void OnCollisionEnter2D(Collision2D coll)
@@ -45,7 +50,7 @@ namespace Assets.Scripts.Food
                 //bounce on the floor
                 if (coll.gameObject.tag == Constant.Floor)
                 {
-                    _rotationAllowed = false;
+                    RotationAllowed = false;
                     if (_nbOfLeaps > 0)
                     {
                         GetComponent<Rigidbody2D>().velocity = new Vector2(_leapPower, _leapPower);
@@ -60,7 +65,7 @@ namespace Assets.Scripts.Food
                     return;
                 }
 
-                _rotationAllowed = false;
+                RotationAllowed = false;
                 Destroy(gameObject);
             }
         }

@@ -1,5 +1,4 @@
-﻿using System;
-using Assets.Scripts.Canon;
+﻿using Assets.Scripts.Food.Interfaces;
 using UnityEngine;
 
 namespace Assets.Scripts.Characters
@@ -12,9 +11,15 @@ namespace Assets.Scripts.Characters
         [SerializeField]
         public int MaxHealth = 100;
 
-        //[HideInInspector]
-        public int CurrentHealth;
+        [HideInInspector]
+        public float CurrentHealth;
 
+        [HideInInspector]
+        public float DotDamagePerTick;
+
+        [HideInInspector]
+        public int DotNbOfTicks;
+        
         private EnumDirection _currentDirection;
 
         void Start ()
@@ -25,8 +30,19 @@ namespace Assets.Scripts.Characters
 	
         void Update ()
         {
+            DotDamage();
             Walk();
             IsDead();
+            
+        }
+
+        private void DotDamage()
+        {
+            if (DotNbOfTicks > 0)
+            {
+                CurrentHealth -= DotDamagePerTick;
+                DotNbOfTicks--;
+            }
         }
 
         private void IsDead()
@@ -49,7 +65,17 @@ namespace Assets.Scripts.Characters
             var food = coll.gameObject.GetComponent<Food.Food>();
             if (food)
             {
+                var fps = 1.0f/Time.deltaTime;
+
                 CurrentHealth -= food.Damage;
+
+                if (food is IDot)
+                {
+                    var foodDot = food as IDot;
+
+                    DotNbOfTicks = foodDot.DotTimer * (int)fps;
+                    DotDamagePerTick = foodDot.DotDamage / ((float)foodDot.DotTimer * fps);
+                }
             }
         }
 

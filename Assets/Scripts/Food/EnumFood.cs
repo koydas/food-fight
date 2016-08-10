@@ -3,7 +3,9 @@
     public enum EnumFood
     {
         Blueberry,
+        HotPepper,
+        Pomegranate,
         Strawberry,
-        Pomegranate
+
     }
 }
