@@ -45,7 +45,7 @@ namespace Assets.Scripts.Food
 
         public void UseSecondAbility()
         {
-            var yTotal = 15;
+            var yTotal = 10;
             var yDiff = yTotal / (float)NbOfFragments;
             var yStart = 10;
 
