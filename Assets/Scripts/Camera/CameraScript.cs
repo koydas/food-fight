@@ -13,8 +13,7 @@ namespace Assets.Scripts.Camera
         private float _timeBeforeCameraZoomIn = 3;
 
         [Header("Move")]
-        //[SerializeField]
-        //private float _minDistance = 1f;
+
         [SerializeField]
         private float _maxDistance = 30f;
         [SerializeField]
@@ -49,7 +48,8 @@ namespace Assets.Scripts.Camera
         }
 
         // Update is called once per frame
-        void Update () {
+        void Update ()
+        {
             if (!_loadLevel.IsLoaded)
             {
                 Zoom();
@@ -81,6 +81,11 @@ namespace Assets.Scripts.Camera
 
         private void Move()
         {
+            if (Input.mousePosition.x < 100)
+            {
+                return;
+            }
+
             if (Input.GetMouseButtonDown(0))
             {
                 if (!_mousePosWhenFirstClick.HasValue)
