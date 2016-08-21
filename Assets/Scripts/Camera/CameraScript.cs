@@ -100,7 +100,7 @@ namespace Assets.Scripts.Camera
 
             if (_mousePosWhenFirstClick != null)
             {
-                var x = Input.mousePosition.x - _mousePosWhenFirstClick.Value.x;
+                var x = _mousePosWhenFirstClick.Value.x - Input.mousePosition.x;
 
                 if (UnityEngine.Camera.main.transform.position.x >= _originalCameraPosition - 1 && UnityEngine.Camera.main.transform.position.x < _maxDistance)
                 {
