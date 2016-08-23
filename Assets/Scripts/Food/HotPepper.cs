@@ -45,7 +45,7 @@ namespace Assets.Scripts.Food
 
         protected override void Rotation()
         {
-            transform.Rotate(new Vector3(0, 0, 7));
+            transform.Rotate(new Vector3(0, 0, 3.5f));
         }
         
         public void UseSecondAbility()
