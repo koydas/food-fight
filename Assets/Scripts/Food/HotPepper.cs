@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Food
 {
-    public class HotPepper : Food, ISecondAbility, IDot
+    public class HotPepper : Food, ISecondAbility, IDot, IVelocityModifier
     {
         [SerializeField]
         private bool _secondSkillDestroyObject;
@@ -14,7 +14,10 @@ namespace Assets.Scripts.Food
 
         [SerializeField]
         private int _dotTimer;
-        
+
+        [SerializeField]
+        private float _velocityModifier;
+
         public int DotDamage
         {
             get { return _dotDamage; }
@@ -27,6 +30,11 @@ namespace Assets.Scripts.Food
             set { _dotTimer = value; }
         }
 
+        public float VelocityModifier
+        {
+            get { return _velocityModifier; }
+            set { _velocityModifier = value; }
+        }
 
         public bool SecondSkillDestroyObject
         {
@@ -45,7 +53,7 @@ namespace Assets.Scripts.Food
 
         protected override void Rotation()
         {
-            transform.Rotate(new Vector3(0, 0, 3.5f));
+            transform.Rotate(new Vector3(0, 0, 4.5f));
         }
         
         public void UseSecondAbility()
@@ -59,5 +67,6 @@ namespace Assets.Scripts.Food
             GetComponent<Rigidbody2D>().velocity = diffPos * 30;
         }
 
+        
     }
 }

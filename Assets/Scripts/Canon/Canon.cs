@@ -1,5 +1,6 @@
 ﻿using System;
 using Assets.Scripts.Food;
+using Assets.Scripts.Food.Interfaces;
 using UnityEngine;
 
 namespace Assets.Scripts.Canon
@@ -79,7 +80,9 @@ namespace Assets.Scripts.Canon
                     CurrentProjectile.layer = Constant.Player;
                 }
 
-                CurrentProjectile.GetComponent<Rigidbody2D>().velocity = CurrentProjectile.transform.right * powerVelocity;
+                var velocityModifier = CurrentProjectile.GetComponent<Food.Food>() as IVelocityModifier;
+
+                CurrentProjectile.GetComponent<Rigidbody2D>().velocity = CurrentProjectile.transform.right * powerVelocity * (velocityModifier != null ? 1 + velocityModifier.VelocityModifier : 1);
 
                 CurrentProjectile.GetComponent<Food.Food>().IsLaunched = true;
                 
