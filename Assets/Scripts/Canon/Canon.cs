@@ -52,7 +52,7 @@ namespace Assets.Scripts.Canon
             float rangeAngle = MaximumAngle - MinimumAngle;
             float rotateValue = -MinimumAngle - (rangeAngle * ajustment);
 
-            CanonBody.eulerAngles = new Vector3(0, 0, rotateValue);
+            CanonBody.localEulerAngles = new Vector3(0, 0, rotateValue);
         }
 
         protected bool Fire(float power, bool isEnnemy)
