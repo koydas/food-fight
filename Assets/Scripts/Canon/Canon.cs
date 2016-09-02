@@ -62,9 +62,9 @@ namespace Assets.Scripts.Canon
             if (CurrentProjectile != null)
             {
 
-                float z = isEnnemy ? CanonBody.eulerAngles.z : -CanonBody.eulerAngles.z;
+                float z = isEnnemy ? CanonBody.localEulerAngles.z : -CanonBody.localEulerAngles.z;
 
-                CurrentProjectile.transform.eulerAngles = new Vector3(0, 0, z + 7);
+                CurrentProjectile.transform.localEulerAngles = new Vector3(0, 0, z + 7);
                 CurrentProjectile.transform.GetComponent<Rigidbody2D>().freezeRotation = true;
 
                 float rangePower = MaximumPower - MinimumPower;
@@ -81,7 +81,7 @@ namespace Assets.Scripts.Canon
                 }
 
                 var velocityModifier = CurrentProjectile.GetComponent<Food.Food>() as IVelocityModifier;
-
+                
                 CurrentProjectile.GetComponent<Rigidbody2D>().velocity = CurrentProjectile.transform.right * powerVelocity * (velocityModifier != null ? 1 + velocityModifier.VelocityModifier : 1);
 
                 CurrentProjectile.GetComponent<Food.Food>().IsLaunched = true;
