@@ -24,13 +24,13 @@ namespace Assets.Scripts.Food
         private LoadLevel _loadLevel;
 
         // Use this for initialization
-        void Start ()
+        public void Start ()
         {
             _loadLevel = FindObjectOfType<LoadLevel>();
         }
 	    
         // Update is called once per frame
-        void Update () {
+        public void Update () {
             if (!_loadLevel.IsLoaded) return;
 
             if (RotationAllowed)
@@ -44,7 +44,7 @@ namespace Assets.Scripts.Food
             transform.Rotate(new Vector3(0, 0, 25));
         }
 
-        void OnCollisionEnter2D(Collision2D coll)
+        public virtual void OnCollisionEnter2D(Collision2D coll)
         {            
             if (IsLaunched && coll.gameObject.tag != Constant.PlatformLimiter && coll.gameObject.tag != Constant.Fragment)
             {

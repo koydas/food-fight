@@ -7,6 +7,8 @@ namespace Assets.Scripts.Canon
 {
     public abstract class Canon : MonoBehaviour
     {
+        public int ShotsCount;
+
         [Header("Projectile")]
         [SerializeField]
         protected GameObject Projectile;
@@ -25,7 +27,7 @@ namespace Assets.Scripts.Canon
 
         protected float OriginalAngle;
         protected Transform CanonBody;
-        protected GameObject CurrentProjectile;
+        public GameObject CurrentProjectile;
         protected LoadLevel LoadLevel ;
         
         public virtual void Start ()
@@ -85,7 +87,9 @@ namespace Assets.Scripts.Canon
                 CurrentProjectile.GetComponent<Rigidbody2D>().velocity = CurrentProjectile.transform.right * powerVelocity * (velocityModifier != null ? 1 + velocityModifier.VelocityModifier : 1);
 
                 CurrentProjectile.GetComponent<Food.Food>().IsLaunched = true;
-                
+
+                ShotsCount++;
+
                 return true;
             }
 

@@ -5,6 +5,9 @@ namespace Assets.Scripts.Characters
 {
     public class SousChef : MonoBehaviour
     {
+        [HideInInspector]
+        public bool IsSlowed;
+
         [SerializeField]
         private float WalkSpeed = 1f;
 
@@ -57,7 +60,7 @@ namespace Assets.Scripts.Characters
         {
             var direction = _currentDirection == EnumDirection.Right ? WalkSpeed : -WalkSpeed;
             
-            GetComponent<Rigidbody2D>().velocity = Vector2.right * direction;
+            GetComponent<Rigidbody2D>().velocity = Vector2.right * direction * (IsSlowed ? .5f : 1f);
         }
 
         public void OnCollisionEnter2D(Collision2D coll)
