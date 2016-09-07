@@ -59,8 +59,6 @@ namespace Assets.Scripts.Food
         {
             base.Update();
 
-            
-
             if (_isIgnited && _dotNbOfTicks <= 0)
             {
                 Destroy();
@@ -70,7 +68,7 @@ namespace Assets.Scripts.Food
                 _dotNbOfTicks--;
             }
 
-            if (_exploded && _playerCanon.ShotsCount >= PlayerCanonTargetShots)
+            if (_exploded && _playerCanon.ShotsCount > PlayerCanonTargetShots)
             {
                 Destroy();
             }
