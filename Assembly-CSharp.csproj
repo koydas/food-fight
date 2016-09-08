@@ -72,6 +72,7 @@
      <Compile Include="Assets\Scripts\LoadLevel.cs" />
      <Compile Include="Assets\Scripts\UI\FoodButton.cs" />
      <Compile Include="Assets\Scripts\UI\FoodButtonHandler.cs" />
+     <Compile Include="Assets\Scripts\UI\PowerFilling.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
