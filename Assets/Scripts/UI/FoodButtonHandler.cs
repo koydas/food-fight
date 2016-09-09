@@ -10,12 +10,48 @@ namespace Assets.Scripts.UI
 
         public void Start()
         {
-            CurrentFoodActive = GameObject.Find("Food Button 1").GetComponent<FoodButton>().Food;
+            int nbOfButtons = transform.parent.childCount;
+
+            var selectedFoods = FoodSelector.SelectedFoods;
+            
+            for (int i = 1; i < nbOfButtons; i++)
+            {
+                var foodButton = transform.parent.GetChild(i);
+                var selectedFood = selectedFoods[i-1];
+
+                foodButton.GetComponent<FoodButton>().IsActive = false;
+
+                if (selectedFood != null)
+                {
+                    foodButton.GetComponent<FoodButton>().Food = Instantiate(selectedFood);
+                }
+                else
+                {
+                    foodButton.GetComponent<FoodButton>().Food = null;
+                }
+
+                foodButton.transform.GetChild(0).GetComponent<Image>().sprite = null;
+                foodButton.transform.GetChild(0).GetComponent<Image>().color = new Color32(255, 255, 225, 0);
+
+                if (selectedFood != null && selectedFood.GetComponent<SpriteRenderer>())
+                {
+                    foodButton.transform.GetChild(0).GetComponent<Image>().sprite = selectedFood.GetComponent<SpriteRenderer>().sprite;
+                    foodButton.transform.GetChild(0).GetComponent<Image>().color = new Color32(255, 255, 225, 255);
+                }
+                
+                if (i == 1)
+                {
+                    CurrentFoodActive = foodButton.GetComponent<FoodButton>().Food;
+                    foodButton.GetComponent<FoodButton>().IsActive = true;
+                }
+
+                Destroy(selectedFood);
+            }
         }
 
         public void Update()
         {
-            var currentActive = GameObject.FindObjectsOfType<FoodButton>().Single(x => x.IsActive);
+            var currentActive = FindObjectsOfType<FoodButton>().Single(x => x.IsActive);
             CurrentFoodActive = currentActive.GetComponent<FoodButton>().Food;
         }
 

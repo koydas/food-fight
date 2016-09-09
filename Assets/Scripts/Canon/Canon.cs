@@ -28,12 +28,9 @@ namespace Assets.Scripts.Canon
         protected float OriginalAngle;
         protected Transform CanonBody;
         public GameObject CurrentProjectile;
-        protected LoadLevel LoadLevel ;
         
         public virtual void Start ()
         {
-            LoadLevel = FindObjectOfType<LoadLevel>();
-            
             CanonBody = transform.FindChild("Canon-body");
             OriginalAngle = CanonBody.eulerAngles.z;
         }

@@ -1,10 +1,8 @@
-﻿using UnityEngine;
-
-namespace Assets.Scripts
+﻿namespace Assets.Scripts
 {
-    public class LoadLevel : MonoBehaviour
+    public static class LoadLevel
     {
-        public bool IsLoaded;
+        public static bool IsLoaded = false;
         
     }
 }

@@ -41,10 +41,8 @@ namespace Assets.Scripts.Food
             set { _dotTimer = value; }
         }
 
-        public new void Start()
+        public void Start()
         {
-            base.Start();
-
             _playerCanon = FindObjectOfType<PlayerCanon>();
             _affectedSousChefs = new List<GameObject>();
 

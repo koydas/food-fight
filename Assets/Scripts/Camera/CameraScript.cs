@@ -20,9 +20,7 @@ namespace Assets.Scripts.Camera
         private float Speed = 0.01f;
 
         private Vector2? _mousePosWhenFirstClick = null;
-
-        private LoadLevel _loadLevel;
-
+        
         private float _originalCameraSize;
         private float _cameraMouvementPerFrame;
         private GameObject _bg;
@@ -30,8 +28,6 @@ namespace Assets.Scripts.Camera
 
         void Start()
         {
-            _loadLevel = FindObjectOfType<LoadLevel>();
-
             _originalCameraSize = UnityEngine.Camera.main.orthographicSize;
             _originalCameraPosition = UnityEngine.Camera.main.transform.position.x;
             _bg = GameObject.Find("bg");
@@ -50,7 +46,7 @@ namespace Assets.Scripts.Camera
         // Update is called once per frame
         void Update ()
         {
-            if (!_loadLevel.IsLoaded)
+            if (!LoadLevel.IsLoaded)
             {
                 Zoom();
                 return;
@@ -61,7 +57,7 @@ namespace Assets.Scripts.Camera
 
         private void Zoom()
         {
-            if (!_loadLevel.IsLoaded && Time.time >= _timeBeforeCameraZoomIn)
+            if (!LoadLevel.IsLoaded && Time.time >= _timeBeforeCameraZoomIn)
             {
                 if (UnityEngine.Camera.main.orthographicSize > _originalCameraSize)
                 {
@@ -74,7 +70,7 @@ namespace Assets.Scripts.Camera
                 }
                 else
                 {
-                    _loadLevel.IsLoaded = true;
+                    LoadLevel.IsLoaded = true;
                 }
             }
         }

@@ -65,6 +65,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\3rd Party\SimpleDragAndDrop\Scripts\DragAndDropCell.cs" />
+    <Compile Include="Assets\3rd Party\SimpleDragAndDrop\Scripts\DragAndDropItem.cs" />
+    <Compile Include="Assets\3rd Party\SimpleDragAndDrop\Scripts\DummyControlUnit.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraScript.cs" />
     <Compile Include="Assets\Scripts\Canon\Canon.cs" />
     <Compile Include="Assets\Scripts\Canon\EnnemyCanon.cs" />
@@ -75,6 +78,7 @@
     <Compile Include="Assets\Scripts\Characters\SousChef.cs" />
     <Compile Include="Assets\Scripts\Constant.cs" />
     <Compile Include="Assets\Scripts\EnumDirection.cs" />
+    <Compile Include="Assets\Scripts\FoodSelector.cs" />
     <Compile Include="Assets\Scripts\Food\Blueberry.cs" />
     <Compile Include="Assets\Scripts\Food\EnumFood.cs" />
     <Compile Include="Assets\Scripts\Food\FlambeePudding.cs" />
@@ -92,6 +96,8 @@
     <Compile Include="Assets\Scripts\LoadLevel.cs" />
     <Compile Include="Assets\Scripts\UI\FoodButton.cs" />
     <Compile Include="Assets\Scripts\UI\FoodButtonHandler.cs" />
+    <Compile Include="Assets\Scripts\UI\PowerFilling.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

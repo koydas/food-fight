@@ -20,18 +20,10 @@ namespace Assets.Scripts.Food
 
         [SerializeField]
         protected bool RotationAllowed = true;
-        
-        private LoadLevel _loadLevel;
 
-        // Use this for initialization
-        public void Start ()
-        {
-            _loadLevel = FindObjectOfType<LoadLevel>();
-        }
-	    
         // Update is called once per frame
         public void Update () {
-            if (!_loadLevel.IsLoaded) return;
+            if (!LoadLevel.IsLoaded) return;
 
             if (RotationAllowed)
             {

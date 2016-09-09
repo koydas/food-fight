@@ -15,27 +15,47 @@ namespace Assets.Scripts
             SceneManager.LoadScene("LevelSelector");
         }
 
-        public void Level(int number)
+        public void Level()
         {
             string numberAsString;
-            if (number < 0)
+            if (FoodSelector.LevelLoaded < 0)
             {
                 throw new Exception("Number need to be positive and at least 1");
             }
-            else if (number < 10)
+            else if (FoodSelector.LevelLoaded < 10)
             {
-                numberAsString = string.Format("00{0}", number);
+                numberAsString = string.Format("00{0}", FoodSelector.LevelLoaded);
             }
-            else if (number < 100)
+            else if (FoodSelector.LevelLoaded < 100)
             {
-                numberAsString = string.Format("0{0}", number);
+                numberAsString = string.Format("0{0}", FoodSelector.LevelLoaded);
             }
             else
             {
-                numberAsString = number.ToString();
+                numberAsString = FoodSelector.LevelLoaded.ToString();
             }
 
+            var SelectedFoodsWrapper = GameObject.FindGameObjectWithTag(Constant.SelectedFood);
+            int nbOfSelectedFoods = SelectedFoodsWrapper.transform.childCount;
+
+            for (int i = 0; i < nbOfSelectedFoods; i++)
+            {
+                if (SelectedFoodsWrapper.transform.GetChild(i).transform.childCount > 0)
+                {
+                    var food = Instantiate(SelectedFoodsWrapper.transform.GetChild(i).transform.GetChild(0).transform.GetChild(0).gameObject);
+                    DontDestroyOnLoad(food);
+                    
+                    FoodSelector.SelectedFoods[i] = food;
+                }
+            }
+            
             SceneManager.LoadScene(string.Format("Level{0}", numberAsString));
+        }
+
+        public void LoadFoodSelector(int level)
+        {
+            FoodSelector.LevelLoaded = level;
+            SceneManager.LoadScene("FoodSelector");
         }
 
         public void StartScreen()
