@@ -54,6 +54,7 @@ namespace Assets.Scripts
 
         public void LoadFoodSelector(int level)
         {
+            LoadLevel.IsLoaded = false;
             FoodSelector.LevelLoaded = level;
             SceneManager.LoadScene("FoodSelector");
         }
