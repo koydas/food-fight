@@ -1,6 +1,8 @@
 ﻿using System;
+using Assets.Scripts.Common;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Assets.Scripts
 {
@@ -15,7 +17,24 @@ namespace Assets.Scripts
             SceneManager.LoadScene("LevelSelector");
         }
 
-        public void Level()
+	    public void OpenModal(GameObject modal)
+	    {
+	        var modalBox = Instantiate(modal);
+
+	        if (modalBox != null)
+	        {
+                modalBox.transform.SetParent(GameObject.Find("Canvas").transform);
+                modalBox.transform.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
+	            modalBox.gameObject.name = "Modal";
+	        }
+        }
+
+	    public void CloseModal()
+	    {
+            Destroy(GameObject.Find("Modal"));
+	    }
+
+	    public void Level()
         {
             string numberAsString;
             if (FoodSelector.LevelLoaded < 0)

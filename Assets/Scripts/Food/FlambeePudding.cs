@@ -9,6 +9,16 @@ namespace Assets.Scripts.Food
 {
     public class FlambeePudding : Food, IDot
     {
+        public override string Title
+        {
+            get { return "Flambee Pudding"; }
+        }
+
+        public override string Text
+        {
+            get { return "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus malesuada nisl neque, at iaculis neque aliquet quis. Proin eu ligula tortor. Aenean congue eu nibh in ullamcorper. Vivamus nulla nibh, bibendum vitae tortor eget, semper tincidunt odio. Maecenas et fermentum tellus, eget dapibus nulla."; }
+        }
+        
         private bool _exploded;
         private bool _isIgnited;
         private List<GameObject> _affectedSousChefs;
@@ -71,7 +81,7 @@ namespace Assets.Scripts.Food
                 Destroy();
             }
         }
-
+        
         public override EnumFood EnumFood
         {
             get

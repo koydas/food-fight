@@ -5,6 +5,9 @@ namespace Assets.Scripts.Food
 {
     public abstract class Food : MonoBehaviour
     {
+        public abstract string Title { get; }
+        public abstract string Text { get; }
+
         public int Damage = 10;
 
         public abstract EnumFood EnumFood { get; set; }
