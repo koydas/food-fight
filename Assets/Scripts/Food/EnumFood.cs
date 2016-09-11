@@ -5,6 +5,7 @@
         Blueberry,
         FlambeePudding,
         HotPepper,
+        Jello,
         Pomegranate,
         Strawberry,
 
