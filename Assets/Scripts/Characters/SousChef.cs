@@ -22,7 +22,8 @@ namespace Assets.Scripts.Characters
 
         [HideInInspector]
         public int DotNbOfTicks;
-        
+
+        [SerializeField]
         private EnumDirection _currentDirection;
 
         void Start ()
@@ -82,13 +83,30 @@ namespace Assets.Scripts.Characters
             }
         }
 
-        public void OnTriggerEnter2D(Collider2D coll)
+        private void ChangeDirection()
+        {
+            var currentScale = transform.localScale;
+            transform.localScale = new Vector3(currentScale.x * -1, currentScale.y, currentScale.z);
+            _currentDirection = _currentDirection == EnumDirection.Right ? EnumDirection.Left : EnumDirection.Right;
+        }
+
+        public void OnTriggerStay2D(Collider2D coll)
         {
             if (coll.gameObject.tag.Equals(Constant.PlatformLimiter))
             {
-                var currentScale = transform.localScale;
-                transform.localScale = new Vector3(currentScale.x * -1, currentScale.y, currentScale.z);
-                _currentDirection = _currentDirection == EnumDirection.Right ? EnumDirection.Left : EnumDirection.Right;
+                ChangeDirection();
+            }
+
+            var platformSettings = coll.GetComponent<PlatformSettings>();
+
+            if ((coll.gameObject.tag.Equals(Constant.PlatformDropper) || coll.gameObject.tag.Equals(Constant.PlatformLifter)) && (platformSettings.DirectionLimited == EnumDirection.All || platformSettings.DirectionLimited == _currentDirection))
+            {
+                transform.position = new Vector3(transform.position.x, platformSettings.LifterOrDropperTarget.transform.position.y, transform.position.z);
+
+                if (platformSettings.ChangeDirection)
+                {
+                    ChangeDirection();
+                }
             }
         }
     }

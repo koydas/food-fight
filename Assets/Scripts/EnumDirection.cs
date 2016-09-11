@@ -2,6 +2,7 @@
 {
     public enum EnumDirection
     {
+        All,
         Up,
         Down,
         Left,

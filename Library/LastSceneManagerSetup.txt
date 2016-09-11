@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/FoodSelector.unity
+- path: Assets/Scenes/Levels/level005.unity
   isLoaded: 1
   isActive: 1
