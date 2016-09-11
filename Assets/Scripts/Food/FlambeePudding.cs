@@ -16,9 +16,14 @@ namespace Assets.Scripts.Food
 
         public override string Text
         {
-            get { return "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus malesuada nisl neque, at iaculis neque aliquet quis. Proin eu ligula tortor. Aenean congue eu nibh in ullamcorper. Vivamus nulla nibh, bibendum vitae tortor eget, semper tincidunt odio. Maecenas et fermentum tellus, eget dapibus nulla."; }
+            get { return "Spreads and make it difficult for a person to walk through. It’s much better once set ablaze!"; }
         }
-        
+
+        public override Sprite Image
+        {
+            get { return transform.GetChild(0).GetComponent<SpriteRenderer>().sprite; }
+        }
+
         private bool _exploded;
         private bool _isIgnited;
         private List<GameObject> _affectedSousChefs;

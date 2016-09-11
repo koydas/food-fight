@@ -13,7 +13,12 @@ namespace Assets.Scripts.Food
 
         public override string Text
         {
-            get { return "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus malesuada nisl neque, at iaculis neque aliquet quis. Proin eu ligula tortor. Aenean congue eu nibh in ullamcorper. Vivamus nulla nibh, bibendum vitae tortor eget, semper tincidunt odio. Maecenas et fermentum tellus, eget dapibus nulla."; }
+            get { return "Make someone feel like they are on fire! Click the screen in midflight to trigger its afterburner!"; }
+        }
+
+        public override Sprite Image
+        {
+            get { return GetComponent<SpriteRenderer>().sprite; }
         }
 
         [SerializeField]

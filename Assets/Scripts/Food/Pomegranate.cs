@@ -12,7 +12,12 @@ namespace Assets.Scripts.Food
 
         public override string Text
         {
-            get { return "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus malesuada nisl neque, at iaculis neque aliquet quis. Proin eu ligula tortor. Aenean congue eu nibh in ullamcorper. Vivamus nulla nibh, bibendum vitae tortor eget, semper tincidunt odio. Maecenas et fermentum tellus, eget dapibus nulla."; }
+            get { return "This red fruit reveals its insides with an explosion of flavor when you click the screen!"; }
+        }
+
+        public override Sprite Image
+        {
+            get { return GetComponent<SpriteRenderer>().sprite; }
         }
 
         [SerializeField]

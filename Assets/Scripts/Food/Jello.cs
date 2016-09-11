@@ -5,6 +5,11 @@ namespace Assets.Scripts.Food
     public class Jello : Food
     {
 
+        public override Sprite Image
+        {
+            get { return GetComponent<SpriteRenderer>().sprite; }
+        }
+
         public void Start()
         {
             GetComponent<SpriteRenderer>().enabled = false;
@@ -17,7 +22,7 @@ namespace Assets.Scripts.Food
 
         public override string Text
         {
-            get { return "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus malesuada nisl neque, at iaculis neque aliquet quis. Proin eu ligula tortor. Aenean congue eu nibh in ullamcorper. Vivamus nulla nibh, bibendum vitae tortor eget, semper tincidunt odio. Maecenas et fermentum tellus, eget dapibus nulla."; }
+            get { return "Trap a person in jello to prevent them from moving or protect your own with a bouncy shell!"; }
         }
 
         public override EnumFood EnumFood

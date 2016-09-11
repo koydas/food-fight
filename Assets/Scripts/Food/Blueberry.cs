@@ -1,4 +1,6 @@
-﻿namespace Assets.Scripts.Food
+﻿using UnityEngine;
+
+namespace Assets.Scripts.Food
 {
     public class Blueberry : Food
     {
@@ -10,7 +12,12 @@
 
         public override string Text
         {
-            get { return "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus malesuada nisl neque, at iaculis neque aliquet quis. Proin eu ligula tortor. Aenean congue eu nibh in ullamcorper. Vivamus nulla nibh, bibendum vitae tortor eget, semper tincidunt odio. Maecenas et fermentum tellus, eget dapibus nulla."; }
+            get { return "This delicious blue fruit bounces a few times but try to aim directly for the sous-chefs!"; }
+        }
+        
+        public override Sprite Image
+        {
+            get { return GetComponent<SpriteRenderer>().sprite; }
         }
 
         public override EnumFood EnumFood

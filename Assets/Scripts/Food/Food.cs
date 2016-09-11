@@ -7,6 +7,7 @@ namespace Assets.Scripts.Food
     {
         public abstract string Title { get; }
         public abstract string Text { get; }
+        public abstract Sprite Image { get; }
 
         public int Damage = 10;
 

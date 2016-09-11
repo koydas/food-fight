@@ -1,4 +1,6 @@
-﻿namespace Assets.Scripts.Food
+﻿using UnityEngine;
+
+namespace Assets.Scripts.Food
 {
     public class PomegranateFragment : Food
     {
@@ -8,6 +10,11 @@
         }
 
         public override string Text
+        {
+            get { return null; }
+        }
+
+        public override Sprite Image
         {
             get { return null; }
         }
