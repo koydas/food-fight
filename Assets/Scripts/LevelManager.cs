@@ -14,6 +14,11 @@ namespace Assets.Scripts
         //todo temporary fix
         public void LevelSelection(int enumFileNumber)
         {
+			if (enumFileNumber == -1)
+			{
+				enumFileNumber = FoodSelector.LevelLoaded;
+			}
+
             SaveManager.SaveManager.SetCurrentSavedGame((EnumFile)enumFileNumber);
 
             SceneManager.LoadScene("LevelSelector");

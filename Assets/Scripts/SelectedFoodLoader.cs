@@ -19,9 +19,11 @@ namespace Assets.Scripts
                 {
                     var availaibleCell = GameObject.Find(selectedFoodName).GetComponentInParent<DragAndDropItem>();
 
-                    availaibleCell.transform.parent = selectedFoods.transform.GetChild(i);
-                    availaibleCell.transform.position = selectedFoods.transform.GetChild(i).position;
-                    
+					if (availaibleCell != null) {
+						availaibleCell.transform.parent = selectedFoods.transform.GetChild(i);
+						availaibleCell.transform.position = selectedFoods.transform.GetChild(i).position;
+					}
+                                        
                     i++;
                 }
             }
@@ -43,8 +45,6 @@ namespace Assets.Scripts
 
         private void FillFoodSelector()
         {
-           // var items = GameObject.Find("Selected Foods").GetComponentsInChildren<Food.Food>();
-
             var selectedFoodsWrapper = GameObject.FindGameObjectWithTag(Constant.SelectedFood);
             int nbOfSelectedFoods = selectedFoodsWrapper.transform.childCount;
 
@@ -60,8 +60,6 @@ namespace Assets.Scripts
                     FoodSelector.SelectedFoods[i] = food;
                 }
             }
-
-        //    FoodSelector.SelectedFoods = items.Select(x => x.gameObject).ToArray();
         }
     }
 }
