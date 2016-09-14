@@ -20,7 +20,7 @@ namespace Assets.Scripts
                     var availaibleCell = GameObject.Find(selectedFoodName).GetComponentInParent<DragAndDropItem>();
 
 					if (availaibleCell != null) {
-						availaibleCell.transform.parent = selectedFoods.transform.GetChild(i);
+						availaibleCell.transform.SetParent (selectedFoods.transform.GetChild (i));
 						availaibleCell.transform.position = selectedFoods.transform.GetChild(i).position;
 					}
                                         
