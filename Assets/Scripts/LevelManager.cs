@@ -1,8 +1,7 @@
 ﻿using System;
-using Assets.Scripts.Common;
+using Assets.Scripts.SaveManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 namespace Assets.Scripts
 {
@@ -12,8 +11,11 @@ namespace Assets.Scripts
             SceneManager.LoadScene("GamePlay");
         }
 
-        public void LevelSelection()
+        //todo temporary fix
+        public void LevelSelection(int enumFileNumber)
         {
+            SaveManager.SaveManager.SetCurrentSavedGame((EnumFile)enumFileNumber);
+
             SceneManager.LoadScene("LevelSelector");
         }
 
@@ -61,26 +63,36 @@ namespace Assets.Scripts
             {
                 if (SelectedFoodsWrapper.transform.GetChild(i).transform.childCount > 0)
                 {
-                    var food = Instantiate(SelectedFoodsWrapper.transform.GetChild(i).transform.GetChild(0).transform.GetChild(0).gameObject);
+                    var child = SelectedFoodsWrapper.transform.GetChild(i).transform.GetChild(0).transform.GetChild(0);
+                    var food = Instantiate(child.gameObject);
+                    food.name = child.name;
                     DontDestroyOnLoad(food);
                     
                     FoodSelector.SelectedFoods[i] = food;
                 }
             }
+
+            if (FoodSelector.HaveSelectedFood())
+            {
+                throw new UnityException("No food selected");
+            }
+
+            SaveManager.SaveManager.Save(EnumFile.Save1);
             
             SceneManager.LoadScene(string.Format("Level{0}", numberAsString));
         }
 
         public void LoadFoodSelector(int level)
         {
+            FoodSelector.DestroySelectedFood();
             LoadLevel.IsLoaded = false;
             FoodSelector.LevelLoaded = level;
             SceneManager.LoadScene("FoodSelector");
         }
 
         public void StartScreen()
-		{
-			SceneManager.LoadScene("StartScreen");
+        {
+            SceneManager.LoadScene("StartScreen");
 		}
 
 		public void OptionScreen()
@@ -90,6 +102,8 @@ namespace Assets.Scripts
 
         public void SavedGamesScreen()
         {
+            SaveManager.SaveManager.Load(EnumFile.Save1);
+
             SceneManager.LoadScene("SavedGames");
         }
 

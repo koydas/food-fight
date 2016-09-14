@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets._3rd_Party.SimpleDragAndDrop.Scripts;
 
 /// <summary>
 /// Example of control unit for drag and drop events handle
