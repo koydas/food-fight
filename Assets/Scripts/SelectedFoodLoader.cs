@@ -2,6 +2,7 @@
 using Assets.Scripts.SaveManager;
 using Assets._3rd_Party.SimpleDragAndDrop.Scripts;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts
 {
@@ -25,6 +26,42 @@ namespace Assets.Scripts
                 }
             }
         }
+
+        void Update()
+        {
+            ShowPlayButton();
+            FillFoodSelector();
+        }
+
+
+        private void ShowPlayButton()
+        {
+            var items = GameObject.Find("Selected Foods").GetComponentsInChildren<DragAndDropItem>();
             
+            GameObject.Find("Play").GetComponent<Button>().interactable = items.Any();
+        }
+
+        private void FillFoodSelector()
+        {
+           // var items = GameObject.Find("Selected Foods").GetComponentsInChildren<Food.Food>();
+
+            var selectedFoodsWrapper = GameObject.FindGameObjectWithTag(Constant.SelectedFood);
+            int nbOfSelectedFoods = selectedFoodsWrapper.transform.childCount;
+
+            for (int i = 0; i < nbOfSelectedFoods; i++)
+            {
+                if (selectedFoodsWrapper.transform.GetChild(i).transform.childCount > 0)
+                {
+                    var child = selectedFoodsWrapper.transform.GetChild(i).transform.GetChild(0).transform.GetChild(0);
+                    var food = Instantiate(child.gameObject);
+                    food.name = child.name;
+                    DontDestroyOnLoad(food);
+
+                    FoodSelector.SelectedFoods[i] = food;
+                }
+            }
+
+        //    FoodSelector.SelectedFoods = items.Select(x => x.gameObject).ToArray();
+        }
     }
 }

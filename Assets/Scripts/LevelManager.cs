@@ -21,6 +21,12 @@ namespace Assets.Scripts
 
 	    public void OpenModal(GameObject modal)
 	    {
+	        if (!FoodSelector.HaveSelectedFood())
+	        {
+                return;
+	        }
+
+
 	        var modalBox = Instantiate(modal);
 
 	        if (modalBox != null)
@@ -56,26 +62,26 @@ namespace Assets.Scripts
                 numberAsString = FoodSelector.LevelLoaded.ToString();
             }
 
-            var SelectedFoodsWrapper = GameObject.FindGameObjectWithTag(Constant.SelectedFood);
-            int nbOfSelectedFoods = SelectedFoodsWrapper.transform.childCount;
+            //var SelectedFoodsWrapper = GameObject.FindGameObjectWithTag(Constant.SelectedFood);
+            //int nbOfSelectedFoods = SelectedFoodsWrapper.transform.childCount;
 
-            for (int i = 0; i < nbOfSelectedFoods; i++)
-            {
-                if (SelectedFoodsWrapper.transform.GetChild(i).transform.childCount > 0)
-                {
-                    var child = SelectedFoodsWrapper.transform.GetChild(i).transform.GetChild(0).transform.GetChild(0);
-                    var food = Instantiate(child.gameObject);
-                    food.name = child.name;
-                    DontDestroyOnLoad(food);
+            //for (int i = 0; i < nbOfSelectedFoods; i++)
+            //{
+            //    if (SelectedFoodsWrapper.transform.GetChild(i).transform.childCount > 0)
+            //    {
+            //        var child = SelectedFoodsWrapper.transform.GetChild(i).transform.GetChild(0).transform.GetChild(0);
+            //        var food = Instantiate(child.gameObject);
+            //        food.name = child.name;
+            //        DontDestroyOnLoad(food);
                     
-                    FoodSelector.SelectedFoods[i] = food;
-                }
-            }
+            //        FoodSelector.SelectedFoods[i] = food;
+            //    }
+            //}
 
-            if (FoodSelector.HaveSelectedFood())
-            {
-                throw new UnityException("No food selected");
-            }
+            //if (!FoodSelector.HaveSelectedFood())
+            //{
+            //    throw new UnityException("No food selected");
+            //}
 
             SaveManager.SaveManager.Save(EnumFile.Save1);
             

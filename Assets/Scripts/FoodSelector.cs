@@ -10,7 +10,7 @@ namespace Assets.Scripts
 
         public static bool HaveSelectedFood()
         {
-            return SelectedFoods.All(x => x == null);
+            return !SelectedFoods.All(x => x == null);
         }
 
         public static void DestroySelectedFood()
