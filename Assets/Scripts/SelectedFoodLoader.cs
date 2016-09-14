@@ -27,12 +27,14 @@ namespace Assets.Scripts
                     i++;
                 }
             }
+
+
         }
 
         void Update()
         {
             ShowPlayButton();
-            FillFoodSelector();
+			FillFoodSelector();
         }
 
 
@@ -43,10 +45,17 @@ namespace Assets.Scripts
             GameObject.Find("Play").GetComponent<Button>().interactable = items.Any();
         }
 
+		//todo temporary fix. Only call when Level will be loaded.
         private void FillFoodSelector()
         {
             var selectedFoodsWrapper = GameObject.FindGameObjectWithTag(Constant.SelectedFood);
             int nbOfSelectedFoods = selectedFoodsWrapper.transform.childCount;
+
+			var dontDestroyOnLoadItems = GameObject.FindGameObjectsWithTag (Constant.DontDestroyOnLoad);
+
+			foreach (var obj in dontDestroyOnLoadItems) {
+				Destroy (obj);
+			}
 
             for (int i = 0; i < nbOfSelectedFoods; i++)
             {
@@ -55,6 +64,8 @@ namespace Assets.Scripts
                     var child = selectedFoodsWrapper.transform.GetChild(i).transform.GetChild(0).transform.GetChild(0);
                     var food = Instantiate(child.gameObject);
                     food.name = child.name;
+					food.tag = Constant.DontDestroyOnLoad;
+
                     DontDestroyOnLoad(food);
 
                     FoodSelector.SelectedFoods[i] = food;

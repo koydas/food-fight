@@ -10,7 +10,8 @@
         public const string Fragment = "Fragment"; 
         public const string SousChef = "Sous Chef"; 
         public const string Untagged = "Untagged";
-        public const string SelectedFood = "SelectedFood";
+		public const string SelectedFood = "SelectedFood";
+		public const string DontDestroyOnLoad = "DontDestroyOnLoad";
         public const string Modal = "Modal";
         public const int Ennemy = 9;
         public const int Player = 8;
