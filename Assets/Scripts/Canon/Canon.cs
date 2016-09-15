@@ -56,7 +56,7 @@ namespace Assets.Scripts.Canon
 
         protected bool Fire(float power, bool isEnnemy)
         {
-            CurrentProjectile = Instantiate(Projectile, new Vector3(CanonBody.position.x, CanonBody.position.y, Projectile.transform.position.z), Quaternion.identity) as GameObject;
+            CurrentProjectile = Instantiate(Projectile, new Vector3(CanonBody.position.x, CanonBody.position.y, 3), Quaternion.identity) as GameObject;
 
             if (CurrentProjectile != null)
             {

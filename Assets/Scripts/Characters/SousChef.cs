@@ -28,7 +28,11 @@ namespace Assets.Scripts.Characters
 
         void Start ()
         {
-            _currentDirection = transform.localScale.x < 0 ? EnumDirection.Right : EnumDirection.Left;
+            if (_currentDirection != EnumDirection.Left && _currentDirection != EnumDirection.Right)
+            {
+                _currentDirection = transform.localScale.x < 0 ? EnumDirection.Right : EnumDirection.Left;
+            }
+
             CurrentHealth = MaxHealth;
         }
 	
