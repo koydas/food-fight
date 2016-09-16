@@ -38,7 +38,7 @@ namespace Assets._3rd_Party.SimpleDragAndDrop.Scripts
             if (canvas != null)
             {
                 // Display on top of all GUI (in parent canvas)
-                icon.transform.SetParent(canvas.transform, true);                       // Set canvas as parent
+                icon.transform.SetParent(canvas.transform, false);                       // Set canvas as parent
                 icon.transform.SetAsLastSibling();                                      // Set as last child in canvas transform
             }
             if (OnItemDragStartEvent != null)

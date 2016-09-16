@@ -36,7 +36,7 @@ namespace Assets.Scripts
 
 	        if (modalBox != null)
 	        {
-                modalBox.transform.SetParent(GameObject.Find("Canvas").transform);
+                modalBox.transform.SetParent(GameObject.Find("Canvas").transform, false);
                 modalBox.transform.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
 	            modalBox.gameObject.name = "Modal";
 	        }
