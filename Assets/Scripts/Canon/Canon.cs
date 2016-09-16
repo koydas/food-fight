@@ -85,6 +85,13 @@ namespace Assets.Scripts.Canon
 
                 CurrentProjectile.GetComponent<Food.Food>().IsLaunched = true;
 
+                var audioSource = GetComponent<AudioSource>();
+
+                if (audioSource != null)
+                {
+                    audioSource.Play();
+                }
+
                 ShotsCount++;
 
                 return true;
