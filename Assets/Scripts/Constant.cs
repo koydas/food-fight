@@ -12,6 +12,7 @@
         public const string Untagged = "Untagged";
 		public const string SelectedFood = "SelectedFood";
 		public const string DontDestroyOnLoad = "DontDestroyOnLoad";
+		public const string Bouncy = "Bouncy";
         public const string Modal = "Modal";
         public const int Ennemy = 9;
         public const int Player = 8;

@@ -56,14 +56,17 @@ namespace Assets.Scripts.Food
                     }
                     else
                     {
-                        Destroy(gameObject);
+                        if (coll.gameObject.tag != Constant.Bouncy)
+                        {
+                           Destroy(gameObject);
+                        }
                     }
 
                     return;
                 }
 
-                RotationAllowed = false;
-                Destroy(gameObject);
+                //RotationAllowed = false;
+                //Destroy(gameObject);
             }
         }
     }
