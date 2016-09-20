@@ -22,8 +22,7 @@ namespace Assets.Scripts.Food
         [SerializeField]
         private float _leapPower = 2.5f;
 
-        [SerializeField]
-        protected bool RotationAllowed = true;
+        public bool RotationAllowed = true;
 
         // Update is called once per frame
         public void Update () {
@@ -64,9 +63,6 @@ namespace Assets.Scripts.Food
 
                     return;
                 }
-
-                //RotationAllowed = false;
-                //Destroy(gameObject);
             }
         }
     }

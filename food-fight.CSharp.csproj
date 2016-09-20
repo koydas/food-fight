@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\Castle.cs" />
     <Compile Include="Assets\Scripts\Characters\HealthBar.cs" />
     <Compile Include="Assets\Scripts\Characters\PlatformSettings.cs" />
+    <Compile Include="Assets\Scripts\Obstacles\Sticky.cs" />
     <Compile Include="Assets\Scripts\SaveManager\EnumSaveElement.cs" />
     <Compile Include="Assets\Scripts\SaveManager\EnumSaveFile.cs" />
     <Compile Include="Assets\Scripts\SaveManager\SavedGame.cs" />
