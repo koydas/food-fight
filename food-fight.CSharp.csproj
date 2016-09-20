@@ -68,6 +68,7 @@
     <Compile Include="Assets\3rd Party\SimpleDragAndDrop\Scripts\DragAndDropCell.cs" />
     <Compile Include="Assets\3rd Party\SimpleDragAndDrop\Scripts\DragAndDropItem.cs" />
     <Compile Include="Assets\3rd Party\SimpleDragAndDrop\Scripts\DummyControlUnit.cs" />
+    <Compile Include="Assets\Scripts\Obstacles\Breakable.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraScript.cs" />
     <Compile Include="Assets\Scripts\Canon\Canon.cs" />
     <Compile Include="Assets\Scripts\Canon\EnnemyCanon.cs" />
