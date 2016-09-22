@@ -72,6 +72,10 @@ namespace Assets.Scripts
             SceneManager.LoadScene(string.Format("Level{0}", numberAsString));
         }
 
+		public void NextLevel() {
+			LoadFoodSelector (FoodSelector.LevelLoaded+1);
+		}
+
         public void LoadFoodSelector(int level)
         {
             FoodSelector.DestroySelectedFood();
@@ -96,6 +100,16 @@ namespace Assets.Scripts
 
             SceneManager.LoadScene("SavedGames");
         }
+
+		public void WinScreen()
+		{
+			SceneManager.LoadScene("Win");
+		}
+
+		public void LoseScreen()
+		{
+			SceneManager.LoadScene("Lose");
+		}
 
         public void QuitApplication()
         {

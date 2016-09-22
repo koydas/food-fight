@@ -14,7 +14,8 @@ public class WinLoseConditions : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		LevelManager = GameObject.FindObjectOfType<LevelManager> () as LevelManager;
+		LevelManager = GetComponent<LevelManager> ();
+			//GameObject.FindObjectOfType<LevelManager> () as LevelManager;
 	}
 
 	// Update is called once per frame
@@ -25,11 +26,11 @@ public class WinLoseConditions : MonoBehaviour {
 		//print (ennemySousChefs);
 
 		if (IsAllEnnemySousChefsDead ()) {
-			print ("Win");
+			LevelManager.WinScreen ();
 		} 
 
 		if (IsAllPlayerSousChefsDead()) {
-			print ("Lose");
+			LevelManager.LoseScreen();
 		}
 	}
 
