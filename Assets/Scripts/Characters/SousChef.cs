@@ -14,7 +14,7 @@ namespace Assets.Scripts.Characters
         [SerializeField]
         public int MaxHealth = 100;
 
-        [HideInInspector]
+        
         public float CurrentHealth;
 
         [HideInInspector]

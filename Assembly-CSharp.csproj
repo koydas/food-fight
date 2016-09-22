@@ -77,6 +77,8 @@
      <Compile Include="Assets\Scripts\FoodSelector.cs" />
      <Compile Include="Assets\Scripts\LevelManager.cs" />
      <Compile Include="Assets\Scripts\LoadLevel.cs" />
+     <Compile Include="Assets\Scripts\Obstacles\Breakable.cs" />
+     <Compile Include="Assets\Scripts\Obstacles\Sticky.cs" />
      <Compile Include="Assets\Scripts\SaveManager\EnumSaveElement.cs" />
      <Compile Include="Assets\Scripts\SaveManager\EnumSaveFile.cs" />
      <Compile Include="Assets\Scripts\SaveManager\SaveManager.cs" />
@@ -86,6 +88,7 @@
      <Compile Include="Assets\Scripts\UI\FoodButtonHandler.cs" />
      <Compile Include="Assets\Scripts\UI\InformationBox.cs" />
      <Compile Include="Assets\Scripts\UI\PowerFilling.cs" />
+     <Compile Include="Assets\Scripts\WinLoseConditions.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
