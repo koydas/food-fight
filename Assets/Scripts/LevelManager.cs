@@ -76,6 +76,11 @@ namespace Assets.Scripts
 			LoadFoodSelector (FoodSelector.LevelLoaded+1);
 		}
 
+		public void LoadFoodSelector()
+		{
+			LoadFoodSelector(FoodSelector.LevelLoaded);
+		}
+
         public void LoadFoodSelector(int level)
         {
             FoodSelector.DestroySelectedFood();
