@@ -57,7 +57,12 @@ namespace Assets.Scripts.Food
                     {
                         if (coll.gameObject.tag != Constant.Bouncy)
                         {
-                           Destroy(gameObject);
+							var audioSource = GetComponent<AudioSource> ();
+							if (audioSource != null) {
+								audioSource.Play ();
+							}
+
+							Destroy(gameObject, audioSource.clip.length);
                         }
                     }
 
