@@ -5,7 +5,17 @@ using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts
 {
-	public class LevelManager : MonoBehaviour {
+	public class LevelManager : MonoBehaviour
+	{
+	    public bool? IsForward;
+	    public AudioClip ForwardSound;
+	    public AudioClip BackSound;
+
+	    public void Start()
+	    {
+	        DontDestroyOnLoad(gameObject);
+	    }
+
 		public void GamePlay()
         {
             SceneManager.LoadScene("GamePlay");
@@ -14,7 +24,9 @@ namespace Assets.Scripts
         //todo temporary fix
         public void LevelSelection(int enumFileNumber)
         {
-			if (enumFileNumber == -1)
+            PlaySound();
+
+            if (enumFileNumber == -1)
 			{
 				enumFileNumber = FoodSelector.LevelLoaded;
 			}
@@ -78,11 +90,15 @@ namespace Assets.Scripts
 
 		public void LoadFoodSelector()
 		{
-			LoadFoodSelector(FoodSelector.LevelLoaded);
+            PlaySound();
+
+            LoadFoodSelector(FoodSelector.LevelLoaded);
 		}
 
         public void LoadFoodSelector(int level)
         {
+            PlaySound();
+
             FoodSelector.DestroySelectedFood();
             LoadLevel.IsLoaded = false;
             FoodSelector.LevelLoaded = level;
@@ -91,16 +107,22 @@ namespace Assets.Scripts
 
         public void StartScreen()
         {
+            PlaySound();
+            
             SceneManager.LoadScene("StartScreen");
 		}
 
 		public void OptionScreen()
 		{
-			SceneManager.LoadScene("Options");
+            PlaySound();
+            
+            SceneManager.LoadScene("Options");
 		}
-
-        public void SavedGamesScreen()
-        {
+        
+	    public void SavedGamesScreen()
+	    {
+	        PlaySound();
+	        
             SaveManager.SaveManager.Load(EnumFile.Save1);
 
             SceneManager.LoadScene("SavedGames");
@@ -119,6 +141,35 @@ namespace Assets.Scripts
         public void QuitApplication()
         {
             Application.Quit();
+        }
+
+	    private void PlaySound()
+	    {
+	        if (IsForward == null)
+	        {
+	            return;
+	        }
+
+	        AudioClip sound = IsForward.Value ? ForwardSound : BackSound;
+            
+            var audioSource = GetComponent<AudioSource>();
+            audioSource.clip = sound;
+            audioSource.Play();
+        }
+
+        public void SetForward()
+	    {
+	        IsForward = true;
+	    }
+
+        public void SetBack()
+	    {
+	        IsForward = false;
+	    }
+
+        public void SetNoSound()
+        {
+            IsForward = null;
         }
     }
 }
