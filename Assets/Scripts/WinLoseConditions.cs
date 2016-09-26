@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts;
+using Assets.Scripts.Canon;
 using Assets.Scripts.Characters;
 
 public class WinLoseConditions : MonoBehaviour {
@@ -15,16 +16,18 @@ public class WinLoseConditions : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		LevelManager = GetComponent<LevelManager> ();
-			//GameObject.FindObjectOfType<LevelManager> () as LevelManager;
 	}
 
 	// Update is called once per frame
 	void Update () {
+	    if (!FindObjectOfType<PlayerCanon>())
+	    {
+	        return;
+	    }
+
 		ennemySousChefs = GetSousChefs (Constant.Ennemy);
 		playerSousChefs = GetSousChefs (Constant.Player);
-
-		//print (ennemySousChefs);
-
+        
 		if (IsAllEnnemySousChefsDead ()) {
 			LevelManager.WinScreen ();
 		} 

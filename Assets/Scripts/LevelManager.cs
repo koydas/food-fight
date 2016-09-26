@@ -80,6 +80,14 @@ namespace Assets.Scripts
             }
 
             SaveManager.SaveManager.Save(EnumFile.Save1);
+
+            foreach (var levelManager in FindObjectsOfType<LevelManager>())
+            {
+                if (levelManager != this)
+                {
+                    Destroy(levelManager.gameObject);
+                }
+            }
             
             SceneManager.LoadScene(string.Format("Level{0}", numberAsString));
         }
