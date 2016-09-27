@@ -45,7 +45,7 @@ namespace Assets.Scripts.UI
                     foodButton.GetComponent<FoodButton>().IsActive = true;
                 }
 
-                Destroy(selectedFood);
+                //Destroy(selectedFood);
             }
         }
 
