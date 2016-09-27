@@ -79,6 +79,7 @@
      <Compile Include="Assets\Scripts\LoadLevel.cs" />
      <Compile Include="Assets\Scripts\Obstacles\Breakable.cs" />
      <Compile Include="Assets\Scripts\Obstacles\Sticky.cs" />
+     <Compile Include="Assets\Scripts\PauseManager.cs" />
      <Compile Include="Assets\Scripts\SaveManager\EnumSaveElement.cs" />
      <Compile Include="Assets\Scripts\SaveManager\EnumSaveFile.cs" />
      <Compile Include="Assets\Scripts\SaveManager\SaveManager.cs" />

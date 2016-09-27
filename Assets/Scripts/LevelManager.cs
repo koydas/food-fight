@@ -179,5 +179,9 @@ namespace Assets.Scripts
         {
             IsForward = null;
         }
+
+		public void PauseGame() {
+			PauseManager.PauseGame();
+		}
     }
 }

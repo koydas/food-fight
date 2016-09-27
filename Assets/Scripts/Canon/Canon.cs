@@ -37,7 +37,7 @@ namespace Assets.Scripts.Canon
 	
         public virtual void Update()
         {
-            if (!LoadLevel.IsLoaded) return;
+			if (!LoadLevel.IsLoaded && PauseManager.IsPaused) return;
 
             SetAngle();
         }

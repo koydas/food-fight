@@ -46,7 +46,7 @@ namespace Assets.Scripts.Camera
         // Update is called once per frame
         void Update ()
         {
-            if (!LoadLevel.IsLoaded)
+			if (!LoadLevel.IsLoaded && !PauseManager.IsPaused)
             {
                 Zoom();
                 return;
@@ -57,7 +57,7 @@ namespace Assets.Scripts.Camera
 
         private void Zoom()
         {
-            if (!LoadLevel.IsLoaded && Time.time >= _timeBeforeCameraZoomIn)
+			if (!LoadLevel.IsLoaded && Time.time >= _timeBeforeCameraZoomIn && !PauseManager.IsPaused)
             {
                 if (UnityEngine.Camera.main.orthographicSize > _originalCameraSize)
                 {
