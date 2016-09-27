@@ -26,7 +26,7 @@ namespace Assets.Scripts.Food
 
         // Update is called once per frame
         public void Update () {
-            if (!LoadLevel.IsLoaded) return;
+			if (!LoadLevel.IsLoaded  || PauseManager.IsPaused) return;
 
             if (RotationAllowed)
             {

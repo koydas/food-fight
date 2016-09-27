@@ -56,7 +56,7 @@ namespace Assets.Scripts.Canon
 
         public override void Update()
         {
-            if (!LoadLevel.IsLoaded) return;
+			if (!LoadLevel.IsLoaded && PauseManager.IsPaused) return;
 
             base.Update();
 
@@ -73,7 +73,7 @@ namespace Assets.Scripts.Canon
 
         private void PowerBarUpAndDown()
         {
-            if (CanonState != EnumCanonState.PowerbarMoving) return;
+			if (CanonState != EnumCanonState.PowerbarMoving || PauseManager.IsPaused) return;
 
             var speed = .025f;
 
@@ -99,7 +99,7 @@ namespace Assets.Scripts.Canon
         
         public override void Fire()
         {
-            if (!LoadLevel.IsLoaded) return;
+			if (!LoadLevel.IsLoaded && PauseManager.IsPaused) return;
 
             switch (CanonState)
             {
