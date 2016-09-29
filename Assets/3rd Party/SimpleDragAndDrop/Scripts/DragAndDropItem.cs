@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -10,6 +11,13 @@ namespace Assets._3rd_Party.SimpleDragAndDrop.Scripts
     [RequireComponent(typeof(Image))]
     public class DragAndDropItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
+        public LevelManager LevelManager;
+
+        void Start()
+        {
+            LevelManager = FindObjectOfType<LevelManager>();
+        }
+
         static public DragAndDropItem draggedItem;                                      // Item that is dragged now
         static public GameObject icon;                                                  // Icon of dragged item
         static public DragAndDropCell sourceCell;                                       // From this cell dragged item is
@@ -45,6 +53,9 @@ namespace Assets._3rd_Party.SimpleDragAndDrop.Scripts
             {
                 OnItemDragStartEvent(this);                                             // Notify all about item drag start
             }
+
+            LevelManager.SetBack();
+            LevelManager.PlaySound();
         }
 
         /// <summary>
@@ -77,6 +88,9 @@ namespace Assets._3rd_Party.SimpleDragAndDrop.Scripts
             draggedItem = null;
             icon = null;
             sourceCell = null;
+
+            LevelManager.SetBack();
+            LevelManager.PlaySound();
         }
 
         /// <summary>

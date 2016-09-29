@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using Assets.Scripts.SaveManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Assets.Scripts
 {
@@ -38,6 +40,8 @@ namespace Assets.Scripts
 
 	    public void OpenModal(GameObject modal)
 	    {
+            PlaySound();
+
 	        if (!FoodSelector.HaveSelectedFood())
 	        {
                 return;
@@ -47,19 +51,23 @@ namespace Assets.Scripts
 
 	        if (modalBox != null)
 	        {
-                modalBox.transform.SetParent(GameObject.Find("Canvas").transform, false);
-                modalBox.transform.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
+	            modalBox.transform.SetParent(GameObject.Find("Canvas").transform, false);
+	            modalBox.transform.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
 	            modalBox.gameObject.name = "Modal";
 	        }
-        }
+	    }
 
 	    public void CloseModal()
 	    {
-            Destroy(GameObject.Find("Modal"));
+            SetBack();
+            PlaySound();
+            Destroy(GameObject.Find("Modal"), BackSound.length);
 	    }
 
 	    public void Level()
         {
+            PlaySound();
+
             LoadLevel.IsLoaded = false;
 
             string numberAsString;
@@ -82,15 +90,15 @@ namespace Assets.Scripts
 
             SaveManager.SaveManager.Save(EnumFile.Save1);
             
-            foreach (var levelManager in FindObjectsOfType<LevelManager>())
-            {
-                if (levelManager != this)
-                {
-                    Destroy(levelManager.gameObject);
-                }
-            }
-
-
+            //todo memory leaks possible
+            //foreach (var levelManager in FindObjectsOfType<LevelManager>())
+            //{
+            //    if (levelManager != this)
+            //    {
+            //        Destroy(levelManager.gameObject);
+            //    }
+            //}
+            
             SceneManager.LoadScene(string.Format("Level{0}", numberAsString));
         }
 
@@ -153,7 +161,7 @@ namespace Assets.Scripts
             Application.Quit();
         }
 
-	    private void PlaySound()
+	    public void PlaySound()
 	    {
 	        if (IsForward == null)
 	        {
