@@ -43,8 +43,7 @@ namespace Assets.Scripts
                 return;
 	        }
 
-
-	        var modalBox = Instantiate(modal);
+            var modalBox = Instantiate(modal);
 
 	        if (modalBox != null)
 	        {
@@ -61,6 +60,8 @@ namespace Assets.Scripts
 
 	    public void Level()
         {
+            LoadLevel.IsLoaded = false;
+
             string numberAsString;
             if (FoodSelector.LevelLoaded < 0)
             {
@@ -80,7 +81,7 @@ namespace Assets.Scripts
             }
 
             SaveManager.SaveManager.Save(EnumFile.Save1);
-
+            
             foreach (var levelManager in FindObjectsOfType<LevelManager>())
             {
                 if (levelManager != this)
@@ -88,7 +89,8 @@ namespace Assets.Scripts
                     Destroy(levelManager.gameObject);
                 }
             }
-            
+
+
             SceneManager.LoadScene(string.Format("Level{0}", numberAsString));
         }
 

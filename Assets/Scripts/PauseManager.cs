@@ -10,7 +10,12 @@ namespace Assets.Scripts
 		public static bool IsPaused;
 
 		public static void PauseGame() {
-			Time.timeScale = IsPaused ? 1 : 0;
+		    if (!LoadLevel.IsLoaded)
+		    {
+		        return;
+		    }
+
+		    Time.timeScale = IsPaused ? 1 : 0;
 			IsPaused = !IsPaused;
 		}
 	}

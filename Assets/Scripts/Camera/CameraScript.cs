@@ -41,12 +41,14 @@ namespace Assets.Scripts.Camera
             int nbOfFramesRequired = (int)(diffSize / _cameraZoomSpeed);
 
             _cameraMouvementPerFrame = (UnityEngine.Camera.main.transform.position.x - _originalCameraPosition) / nbOfFramesRequired;
+
+            LoadLevel.IsLoaded = false;
         }
 
         // Update is called once per frame
         void Update ()
         {
-			if (!LoadLevel.IsLoaded && !PauseManager.IsPaused)
+			if (!LoadLevel.IsLoaded)
             {
                 Zoom();
                 return;
@@ -57,11 +59,18 @@ namespace Assets.Scripts.Camera
 
         private void Zoom()
         {
-			if (!LoadLevel.IsLoaded && Time.time >= _timeBeforeCameraZoomIn && !PauseManager.IsPaused)
-            {
+			if (Time.time >= _timeBeforeCameraZoomIn)
+			{
+			    bool isSizeGood = false;
+			    bool isPositionGood = false;
+
                 if (UnityEngine.Camera.main.orthographicSize > _originalCameraSize)
                 {
                     UnityEngine.Camera.main.orthographicSize -= _cameraZoomSpeed;
+                }
+                else
+                {
+                    isSizeGood = true;
                 }
 
                 if (UnityEngine.Camera.main.transform.position.x > _originalCameraPosition)
@@ -70,9 +79,14 @@ namespace Assets.Scripts.Camera
                 }
                 else
                 {
-                    LoadLevel.IsLoaded = true;
+                    isPositionGood = true;
                 }
-            }
+
+			    if (isSizeGood && isPositionGood)
+			    {
+			        LoadLevel.IsLoaded = true;
+			    }
+			}
         }
 
         private void Move()
