@@ -40,35 +40,43 @@ namespace Assets.Scripts
 
         private void ShowPlayButton()
         {
-            var items = GameObject.Find("Selected Foods").GetComponentsInChildren<DragAndDropItem>();
-            
-            GameObject.Find("Play").GetComponent<Button>().interactable = items.Any();
+            var find = GameObject.Find("Selected Foods");
+            if (find != null)
+            {
+                var items = find.GetComponentsInChildren<DragAndDropItem>();
+                GameObject.Find("Play").GetComponent<Button>().interactable = items.Any();
+            }
         }
 
 		//todo temporary fix. Only call when Level will be loaded.
         private void FillFoodSelector()
         {
             var selectedFoodsWrapper = GameObject.FindGameObjectWithTag(Constant.SelectedFood);
-            int nbOfSelectedFoods = selectedFoodsWrapper.transform.childCount;
 
-			var dontDestroyOnLoadItems = GameObject.FindGameObjectsWithTag (Constant.DontDestroyOnLoad);
-
-			foreach (var obj in dontDestroyOnLoadItems) {
-				Destroy (obj);
-			}
-
-            for (int i = 0; i < nbOfSelectedFoods; i++)
+            if (selectedFoodsWrapper != null)
             {
-                if (selectedFoodsWrapper.transform.GetChild(i).transform.childCount > 0)
+                int nbOfSelectedFoods = selectedFoodsWrapper.transform.childCount;
+
+                var dontDestroyOnLoadItems = GameObject.FindGameObjectsWithTag(Constant.DontDestroyOnLoad);
+
+                foreach (var obj in dontDestroyOnLoadItems)
                 {
-                    var child = selectedFoodsWrapper.transform.GetChild(i).transform.GetChild(0).transform.GetChild(0);
-                    var food = Instantiate(child.gameObject);
-                    food.name = child.name;
-					food.tag = Constant.DontDestroyOnLoad;
+                    Destroy(obj);
+                }
 
-                    DontDestroyOnLoad(food);
+                for (int i = 0; i < nbOfSelectedFoods; i++)
+                {
+                    if (selectedFoodsWrapper.transform.GetChild(i).transform.childCount > 0)
+                    {
+                        var child = selectedFoodsWrapper.transform.GetChild(i).transform.GetChild(0).transform.GetChild(0);
+                        var food = Instantiate(child.gameObject);
+                        food.name = child.name;
+                        food.tag = Constant.DontDestroyOnLoad;
 
-                    FoodSelector.SelectedFoods[i] = food;
+                        DontDestroyOnLoad(food);
+
+                        FoodSelector.SelectedFoods[i] = food;
+                    }
                 }
             }
         }

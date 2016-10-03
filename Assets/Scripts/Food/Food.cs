@@ -62,7 +62,9 @@ namespace Assets.Scripts.Food
 								audioSource.Play ();
 							}
 
-							Destroy(gameObject, audioSource.clip.length);
+                            var delay = audioSource != null && audioSource.clip != null ? audioSource.clip.length : 0;
+
+                            Destroy(gameObject, delay);
                         }
                     }
 
