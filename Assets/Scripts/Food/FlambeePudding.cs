@@ -98,7 +98,7 @@ namespace Assets.Scripts.Food
 
         public override void OnCollisionEnter2D(Collision2D coll)
         {
-            if (IsLaunched && coll.gameObject.tag != Constant.PlatformLimiter && coll.gameObject.tag != Constant.Fragment)
+            if (IsLaunched && coll.gameObject.tag != Constant.PlatformLimiter && coll.gameObject.tag != Constant.Fragment && coll.gameObject.tag != Constant.Bouncy)
             {
                 RotationAllowed = false;
                 transform.localEulerAngles = new Vector3();

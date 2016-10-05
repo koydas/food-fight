@@ -27,6 +27,8 @@ namespace Assets.Scripts.Food
         [SerializeField]
         private int _nbOfFragments;
 
+        public EnumDirection Direction;
+
         public bool SecondSkillDestroyObject
         {
             get { return _secondSkillDestroyObject; }
@@ -69,6 +71,8 @@ namespace Assets.Scripts.Food
                 var yVel = yStart - yDiff*i;
                 var frag = Instantiate(Fragment, transform.position, Quaternion.identity) as GameObject;
 
+                frag.layer = gameObject.layer;
+
                 if (frag != null)
                 {
                     if (FragmentToFollow == null)
@@ -76,12 +80,26 @@ namespace Assets.Scripts.Food
                         FragmentToFollow = frag;
                     }
 
-                    frag.GetComponent<Rigidbody2D>().velocity = new Vector2(10, yVel);
+                    var xVel = 10;
+                    if (Direction == EnumDirection.Left)
+                    {
+                        xVel *= -1;
+                    }
+
+                    frag.GetComponent<Rigidbody2D>().velocity = new Vector2(xVel, yVel);
                     frag.GetComponent<PomegranateFragment>().IsLaunched = true;
                 }
             }
         }
 
-        
+        public override void OnCollisionEnter2D(Collision2D coll)
+        {
+            base.OnCollisionEnter2D(coll);
+
+            if (coll.gameObject.tag == Constant.Bouncy)
+            {
+                Direction = Direction == EnumDirection.Right ? EnumDirection.Left : EnumDirection.Right;
+            }
+        }
     }
 }
