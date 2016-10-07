@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Food;
+using UnityEngine;
 
 namespace Assets.Scripts.Obstacles
 {
@@ -6,6 +7,11 @@ namespace Assets.Scripts.Obstacles
     {
         public void OnCollisionEnter2D(Collision2D coll)
         {
+            if (coll.gameObject.GetComponent<FoodFragment>())
+            {
+                return;
+            }
+
             var rigidbody = coll.gameObject.GetComponent<Rigidbody2D>();
             rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
 

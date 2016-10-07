@@ -85,6 +85,7 @@
     <Compile Include="Assets\Scripts\Food\Blueberry.cs" />
     <Compile Include="Assets\Scripts\Food\EnumFood.cs" />
     <Compile Include="Assets\Scripts\Food\FlambeePudding.cs" />
+    <Compile Include="Assets\Scripts\Food\FoodFragment.cs" />
     <Compile Include="Assets\Scripts\Food\Food.cs" />
     <Compile Include="Assets\Scripts\Food\FoodHelper.cs" />
     <Compile Include="Assets\Scripts\Food\HotPepper.cs" />

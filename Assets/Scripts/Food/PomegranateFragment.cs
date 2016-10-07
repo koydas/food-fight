@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.Food
 {
-    public class PomegranateFragment : Food
+    public class PomegranateFragment : FoodFragment
     {
         public override string Title
         {

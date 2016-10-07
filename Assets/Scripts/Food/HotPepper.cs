@@ -80,6 +80,9 @@ namespace Assets.Scripts.Food
 
             RotationAllowed = false;
             GetComponent<Rigidbody2D>().velocity = diffPos * 30;
+
+            var rigidbody = GetComponent<Rigidbody2D>();
+            rigidbody.constraints = RigidbodyConstraints2D.None;
         }
 
         

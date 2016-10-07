@@ -13,7 +13,7 @@ namespace Assets.Scripts.Food
 
         public override string Text
         {
-            get { return "Description to write."; }
+            get { return "This hard nut is perfect for breaking through walls that stand in your way."; }
         }
         
         public override Sprite Image
