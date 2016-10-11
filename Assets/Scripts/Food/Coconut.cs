@@ -34,9 +34,12 @@ namespace Assets.Scripts.Food
         {
             base.OnCollisionEnter2D(coll);
 
+            var velocity = coll.relativeVelocity;
+
             if (coll.gameObject.GetComponent<Breakable>())
             {
                 Destroy(coll.gameObject);
+                GetComponent<Rigidbody2D>().velocity = velocity;
             }
         }
 
