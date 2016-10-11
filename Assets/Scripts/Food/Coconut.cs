@@ -39,7 +39,7 @@ namespace Assets.Scripts.Food
             if (coll.gameObject.GetComponent<Breakable>())
             {
                 Destroy(coll.gameObject);
-                GetComponent<Rigidbody2D>().velocity = velocity;
+                GetComponent<Rigidbody2D>().velocity = velocity * .7f;
             }
         }
 
