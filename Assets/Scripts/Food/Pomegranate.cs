@@ -68,7 +68,7 @@ namespace Assets.Scripts.Food
 
             for (int i = 0; i < NbOfFragments; i++)
             {
-                var yVel = yStart - yDiff*i;
+                float yVel = yStart - yDiff*i;
                 var frag = Instantiate(Fragment, transform.position, Quaternion.identity) as GameObject;
 
                 frag.layer = gameObject.layer;
@@ -80,12 +80,23 @@ namespace Assets.Scripts.Food
                         FragmentToFollow = frag;
                     }
 
-                    var xVel = 10;
-                    if (Direction == EnumDirection.Left)
-                    {
-                        xVel *= -1;
-                    }
+                    float xVel = 10;
 
+                    switch (Direction)
+                    {
+                            case EnumDirection.Left:
+                            xVel *= -1;
+                            break;
+                        case EnumDirection.Up:
+                            xVel = yVel;
+                            yVel = 10;
+                            break;
+                        case EnumDirection.Down:
+                            xVel = yVel;
+                            yVel = -10;
+                            break;
+                    }
+                    
                     frag.GetComponent<Rigidbody2D>().velocity = new Vector2(xVel, yVel);
                     frag.GetComponent<PomegranateFragment>().IsLaunched = true;
                 }
@@ -99,6 +110,26 @@ namespace Assets.Scripts.Food
             if (coll.gameObject.tag == Constant.Bouncy)
             {
                 Direction = Direction == EnumDirection.Right ? EnumDirection.Left : EnumDirection.Right;
+            }
+
+            if (coll.gameObject.tag == Constant.Sticky)
+            {
+                if (coll.contacts[0].normal.x == -1)
+                {
+                    Direction = EnumDirection.Right;
+                }
+                else if (coll.contacts[0].normal.x == 1)
+                {
+                    Direction = EnumDirection.Left;
+                }
+                else if (coll.contacts[0].normal.y == -1)
+                {
+                    Direction = EnumDirection.Up;
+                }
+                else if (coll.contacts[0].normal.y == 1)
+                {
+                    Direction = EnumDirection.Down;
+                }
             }
         }
     }

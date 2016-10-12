@@ -14,6 +14,7 @@ namespace Assets.Scripts.Obstacles
 
             var rigidbody = coll.gameObject.GetComponent<Rigidbody2D>();
             rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+            rigidbody.velocity = Vector2.zero;
 
             var food = coll.gameObject.GetComponent<Food.Food>();
             if (food)
