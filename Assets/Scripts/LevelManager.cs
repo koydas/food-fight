@@ -221,5 +221,10 @@ namespace Assets.Scripts
 		public void PauseGame() {
 			PauseManager.PauseGame();
 		}
+
+        public void ResetData()
+        {
+            SaveManager.SaveManager.Reset();
+        }
     }
 }

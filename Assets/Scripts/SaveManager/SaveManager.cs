@@ -43,10 +43,17 @@ namespace Assets.Scripts.SaveManager
             bf.Serialize(file, savedGame);
             file.Close();
         }
-        
-        public static void Delete()
-        {
 
+        public static void Reset()
+        {
+            File.Delete(string.Format("{0}/{1}", Application.persistentDataPath, EnumFile.Save1));
+            File.Delete(string.Format("{0}/{1}", Application.persistentDataPath, EnumFile.Save2));
+            File.Delete(string.Format("{0}/{1}", Application.persistentDataPath, EnumFile.Save3));
+        }
+
+        public static void Reset(EnumFile enumFile)
+        {
+            File.Delete(string.Format("{0}/{1}", Application.persistentDataPath, enumFile));
         }
 
         public static void Load(EnumFile enumFile)
@@ -87,7 +94,6 @@ namespace Assets.Scripts.SaveManager
             file.Close();
         }
         
-
         public static void LoadOptions()
         {
             var filePath = Application.persistentDataPath + "/options";
@@ -105,6 +111,17 @@ namespace Assets.Scripts.SaveManager
                 VolumeManager.Sfx = SavedOptions.SfxSound;
                 VolumeManager.Music = SavedOptions.MusicSound;
             }
+        }
+
+        public static void ResetOptions()
+        {
+            File.Delete(Application.persistentDataPath + "/options");
+        }
+
+        public static void ResetAllData()
+        {
+            Reset();
+            ResetOptions();
         }
     }
 }
