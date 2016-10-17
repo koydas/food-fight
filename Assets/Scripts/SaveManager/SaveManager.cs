@@ -12,6 +12,8 @@ namespace Assets.Scripts.SaveManager
 
         public static SavedGame CurrentSavedGame;
 
+        public static SavedOptions SavedOptions;
+
         public static void SetCurrentSavedGame(EnumFile enumFile)
         {
             if (Saves.ContainsKey(enumFile))
@@ -66,6 +68,42 @@ namespace Assets.Scripts.SaveManager
                 }
 
                 file.Close();
+            }
+        }
+
+        public static void SaveOptions()
+        {
+            var bf = new BinaryFormatter();
+            var file = File.Create(Application.persistentDataPath + "/options");
+            
+            var savedOptions = new SavedOptions
+            {
+                MasterSound = VolumeManager.Master,
+                SfxSound = VolumeManager.Sfx,
+                MusicSound = VolumeManager.Music
+            };
+
+            bf.Serialize(file, savedOptions);
+            file.Close();
+        }
+        
+
+        public static void LoadOptions()
+        {
+            var filePath = Application.persistentDataPath + "/options";
+            if (File.Exists(filePath))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.Open(filePath, FileMode.Open);
+                var savedData = (SavedOptions)bf.Deserialize(file);
+
+                SavedOptions = savedData;
+                
+                file.Close();
+
+                VolumeManager.Master = SavedOptions.MasterSound;
+                VolumeManager.Sfx = SavedOptions.SfxSound;
+                VolumeManager.Music = SavedOptions.MusicSound;
             }
         }
     }

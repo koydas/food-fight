@@ -59,7 +59,8 @@ namespace Assets.Scripts.Food
                         {
 							var audioSource = GetComponent<AudioSource> ();
 							if (audioSource != null) {
-								audioSource.Play ();
+                                audioSource.volume = VolumeManager.GetSfxVolume();
+                                audioSource.Play();
 							}
 
                             var delay = audioSource != null && audioSource.clip != null ? audioSource.clip.length : 0;

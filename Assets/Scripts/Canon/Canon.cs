@@ -89,6 +89,7 @@ namespace Assets.Scripts.Canon
 
                 if (audioSource != null)
                 {
+                    audioSource.volume = VolumeManager.GetSfxVolume();
                     audioSource.Play();
                 }
 

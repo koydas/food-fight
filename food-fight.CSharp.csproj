@@ -81,12 +81,12 @@
     <Compile Include="Assets\Scripts\Common\Modal.cs" />
     <Compile Include="Assets\Scripts\Constant.cs" />
     <Compile Include="Assets\Scripts\EnumDirection.cs" />
-    <Compile Include="Assets\Scripts\Food\Coconut.cs" />
     <Compile Include="Assets\Scripts\Food\Blueberry.cs" />
+    <Compile Include="Assets\Scripts\Food\Coconut.cs" />
     <Compile Include="Assets\Scripts\Food\EnumFood.cs" />
     <Compile Include="Assets\Scripts\Food\FlambeePudding.cs" />
-    <Compile Include="Assets\Scripts\Food\FoodFragment.cs" />
     <Compile Include="Assets\Scripts\Food\Food.cs" />
+    <Compile Include="Assets\Scripts\Food\FoodFragment.cs" />
     <Compile Include="Assets\Scripts\Food\FoodHelper.cs" />
     <Compile Include="Assets\Scripts\Food\HotPepper.cs" />
     <Compile Include="Assets\Scripts\Food\Interfaces\IDot.cs" />
@@ -104,14 +104,17 @@
     <Compile Include="Assets\Scripts\PauseManager.cs" />
     <Compile Include="Assets\Scripts\SaveManager\EnumSaveElement.cs" />
     <Compile Include="Assets\Scripts\SaveManager\EnumSaveFile.cs" />
+    <Compile Include="Assets\Scripts\SaveManager\SavedOptions.cs" />
     <Compile Include="Assets\Scripts\SaveManager\SaveManager.cs" />
     <Compile Include="Assets\Scripts\SaveManager\SavedGame.cs" />
     <Compile Include="Assets\Scripts\SelectedFoodLoader.cs" />
     <Compile Include="Assets\Scripts\UI\FoodButton.cs" />
     <Compile Include="Assets\Scripts\UI\FoodButtonHandler.cs" />
     <Compile Include="Assets\Scripts\UI\InformationBox.cs" />
+    <Compile Include="Assets\Scripts\UI\OptionsFillUp.cs" />
     <Compile Include="Assets\Scripts\UI\PowerFilling.cs" />
     <Compile Include="Assets\Scripts\WinLoseConditions.cs" />
+    <Compile Include="Assets\VolumeManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

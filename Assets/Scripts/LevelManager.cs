@@ -16,6 +16,8 @@ namespace Assets.Scripts
 	    public void Start()
 	    {
 	        DontDestroyOnLoad(gameObject);
+
+            SaveManager.SaveManager.LoadOptions();
 	    }
 
 		public void GamePlay()
@@ -136,8 +138,33 @@ namespace Assets.Scripts
             
             SceneManager.LoadScene("Options");
 		}
-        
-	    public void SavedGamesScreen()
+
+        public void SetUpOptions()
+        {
+            Scrollbar[] scrollbars = FindObjectsOfType<Scrollbar>();
+
+            foreach (var scrollbar in scrollbars)
+            {
+                switch (scrollbar.name)
+                {
+                    case "MasterVolume":
+                        VolumeManager.Master = scrollbar.value;
+                        break;
+                    case "SfxVolume":
+                        VolumeManager.Sfx = scrollbar.value;
+                        break;
+                    case "MusicVolume":
+                        VolumeManager.Music = scrollbar.value;
+                        break;
+                }
+            }
+
+            SaveManager.SaveManager.SaveOptions();
+
+            StartScreen();
+        }
+
+        public void SavedGamesScreen()
 	    {
 	        PlaySound();
 	        
@@ -172,6 +199,7 @@ namespace Assets.Scripts
             
             var audioSource = GetComponent<AudioSource>();
             audioSource.clip = sound;
+	        audioSource.volume = VolumeManager.GetSfxVolume();
             audioSource.Play();
         }
 
