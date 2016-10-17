@@ -40,15 +40,20 @@ namespace Assets.Scripts
             SceneManager.LoadScene("LevelSelector");
         }
 
-	    public void OpenModal(GameObject modal)
+        public void OpenModalFoodSelector(GameObject modal)
+        {
+            if (!FoodSelector.HaveSelectedFood())
+            {
+                return;
+            }
+
+            OpenModal(modal);
+        }
+
+        public void OpenModal(GameObject modal)
 	    {
             PlaySound();
-
-	        if (!FoodSelector.HaveSelectedFood())
-	        {
-                return;
-	        }
-
+            
             var modalBox = Instantiate(modal);
 
 	        if (modalBox != null)
@@ -225,6 +230,7 @@ namespace Assets.Scripts
         public void ResetData()
         {
             SaveManager.SaveManager.Reset();
+            CloseModal();
         }
     }
 }
