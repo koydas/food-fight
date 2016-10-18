@@ -57,6 +57,12 @@ namespace Assets.Scripts.Food
             set { _secondSkillDestroyObject = value; }
         }
 
+        public bool SecondSkillRepeatable
+        {
+            get { return false; }
+            set { }
+        }
+
         public override EnumFood EnumFood
         {
             get

@@ -82,6 +82,7 @@
     <Compile Include="Assets\Scripts\Common\Modal.cs" />
     <Compile Include="Assets\Scripts\Constant.cs" />
     <Compile Include="Assets\Scripts\EnumDirection.cs" />
+    <Compile Include="Assets\Scripts\Food\Chicken.cs" />
     <Compile Include="Assets\Scripts\Food\Blueberry.cs" />
     <Compile Include="Assets\Scripts\Food\Coconut.cs" />
     <Compile Include="Assets\Scripts\Food\EnumFood.cs" />

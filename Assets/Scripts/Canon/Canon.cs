@@ -65,6 +65,7 @@ namespace Assets.Scripts.Canon
 
                 CurrentProjectile.transform.localEulerAngles = new Vector3(0, 0, z + 7);
                 CurrentProjectile.transform.GetComponent<Rigidbody2D>().freezeRotation = true;
+                CurrentProjectile.GetComponent<Food.Food>().OriginalAngle = CurrentProjectile.transform.localEulerAngles;
 
                 float rangePower = MaximumPower - MinimumPower;
                 float powerVelocity = MinimumPower + (rangePower * power);

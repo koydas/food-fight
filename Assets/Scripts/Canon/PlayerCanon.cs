@@ -117,7 +117,13 @@ namespace Assets.Scripts.Canon
 
                 case EnumCanonState.Launched:
                     UseSecondAbility();
-                    CanonState = EnumCanonState.FollowFragment;
+
+                    var projectile = CurrentProjectile.GetComponent<ISecondAbility>();
+                    
+                    if (projectile != null && !projectile.SecondSkillRepeatable)
+                    {
+                        CanonState = EnumCanonState.FollowFragment;
+                    }
                     break;
             }
         }

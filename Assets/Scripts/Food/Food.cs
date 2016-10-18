@@ -9,6 +9,8 @@ namespace Assets.Scripts.Food
         public abstract string Text { get; }
         public abstract Sprite Image { get; }
 
+        public Vector3 OriginalAngle;
+
         public int Damage = 10;
 
         public abstract EnumFood EnumFood { get; set; }

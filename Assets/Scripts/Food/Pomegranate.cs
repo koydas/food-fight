@@ -36,6 +36,12 @@ namespace Assets.Scripts.Food
 
         }
 
+        public bool SecondSkillRepeatable
+        {
+            get { return false; }
+            set { }
+        }
+
         public GameObject Fragment
         {
             get { return _fragment; }
