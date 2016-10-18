@@ -82,6 +82,7 @@
     <Compile Include="Assets\Scripts\Common\Modal.cs" />
     <Compile Include="Assets\Scripts\Constant.cs" />
     <Compile Include="Assets\Scripts\EnumDirection.cs" />
+    <Compile Include="Assets\Scripts\Food\Blowfish.cs" />
     <Compile Include="Assets\Scripts\Food\Chicken.cs" />
     <Compile Include="Assets\Scripts\Food\Blueberry.cs" />
     <Compile Include="Assets\Scripts\Food\Coconut.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Assets\Scripts\Food\Interfaces\IVelocityModifier.cs" />
     <Compile Include="Assets\Scripts\Food\Jello.cs" />
     <Compile Include="Assets\Scripts\Food\Pomegranate.cs" />
+    <Compile Include="Assets\Scripts\Food\BlowfishFragment.cs" />
     <Compile Include="Assets\Scripts\Food\PomegranateFragment.cs" />
     <Compile Include="Assets\Scripts\FoodSelector.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />

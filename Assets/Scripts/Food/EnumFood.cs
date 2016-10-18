@@ -2,6 +2,7 @@
 {
     public enum EnumFood
     {
+        Blowfish,
         Blueberry,
         Chicken,
         Coconut,

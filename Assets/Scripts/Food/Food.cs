@@ -69,6 +69,7 @@ namespace Assets.Scripts.Food
 
                             Destroy(gameObject, delay);
                         }
+                        Destroy(gameObject);
                     }
 
                     return;
