@@ -10,21 +10,15 @@ namespace Assets.Scripts.SaveManager
     {
         public static Dictionary<EnumFile, SavedGame> Saves = new Dictionary<EnumFile, SavedGame>();
 
+        public static EnumFile CurrentSavedGameEnumFile;
         public static SavedGame CurrentSavedGame;
 
         public static SavedOptions SavedOptions;
 
         public static void SetCurrentSavedGame(EnumFile enumFile)
         {
-            if (Saves.ContainsKey(enumFile))
-            {
-                CurrentSavedGame = Saves[enumFile];
-            }
-            else
-            {
-                CurrentSavedGame = new SavedGame();
-// throw new UnityException("enumFile not present in dictionary");
-            }
+            CurrentSavedGameEnumFile = enumFile;
+            CurrentSavedGame = Saves.ContainsKey(enumFile) ? Saves[enumFile] : new SavedGame();
         }
 
         public static void Save(EnumFile enumFile)
@@ -54,6 +48,14 @@ namespace Assets.Scripts.SaveManager
         public static void Reset(EnumFile enumFile)
         {
             File.Delete(string.Format("{0}/{1}", Application.persistentDataPath, enumFile));
+            Saves.Remove(enumFile);
+        }
+
+        public static void Load()
+        {
+            Load(EnumFile.Save1);
+            Load(EnumFile.Save2);
+            Load(EnumFile.Save3);
         }
 
         public static void Load(EnumFile enumFile)

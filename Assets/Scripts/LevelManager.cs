@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Linq;
 using Assets.Scripts.SaveManager;
+using Assets.Scripts.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,14 +13,16 @@ namespace Assets.Scripts
 	    public AudioClip ForwardSound;
 	    public AudioClip BackSound;
 
-	    public void Start()
+	    private int _resetDataFileNumber;
+
+        public void Start()
 	    {
 	        DontDestroyOnLoad(gameObject);
 
             SaveManager.SaveManager.LoadOptions();
 	    }
 
-		public void GamePlay()
+	    public void GamePlay()
         {
             SceneManager.LoadScene("GamePlay");
         }
@@ -47,10 +49,15 @@ namespace Assets.Scripts
                 return;
             }
 
-            OpenModal(modal);
+            OpenModal(modal, false);
         }
 
-        public void OpenModal(GameObject modal)
+        public void OpenModalResetData(GameObject modal)
+        {
+            OpenModal(modal, true);
+        }
+
+        public void OpenModal(GameObject modal, bool isResetData)
 	    {
             PlaySound();
             
@@ -61,6 +68,12 @@ namespace Assets.Scripts
 	            modalBox.transform.SetParent(GameObject.Find("Canvas").transform, false);
 	            modalBox.transform.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
 	            modalBox.gameObject.name = "Modal";
+
+	            if (isResetData)
+	            {
+	                var component = modalBox.transform.GetChild(3).GetComponent<Button>();
+	                component.onClick.AddListener(() => ResetData(_resetDataFileNumber));
+	            }
 	        }
 	    }
 
@@ -95,7 +108,7 @@ namespace Assets.Scripts
                 numberAsString = FoodSelector.LevelLoaded.ToString();
             }
 
-            SaveManager.SaveManager.Save(EnumFile.Save1);
+            SaveManager.SaveManager.Save(SaveManager.SaveManager.CurrentSavedGameEnumFile);
             
             //todo memory leaks possible
             //foreach (var levelManager in FindObjectsOfType<LevelManager>())
@@ -173,7 +186,7 @@ namespace Assets.Scripts
 	    {
 	        PlaySound();
 	        
-            SaveManager.SaveManager.Load(EnumFile.Save1);
+            SaveManager.SaveManager.Load();
 
             SceneManager.LoadScene("SavedGames");
         }
@@ -208,6 +221,11 @@ namespace Assets.Scripts
             audioSource.Play();
         }
 
+	    public void SetResetDataEnumFile(int filerNumber)
+	    {
+	        _resetDataFileNumber = filerNumber;
+	    }
+
         public void SetForward()
 	    {
 	        IsForward = true;
@@ -227,9 +245,11 @@ namespace Assets.Scripts
 			PauseManager.PauseGame();
 		}
 
-        public void ResetData()
+        public void ResetData(int filenumber)
         {
-            SaveManager.SaveManager.Reset();
+            var enumFile = (EnumFile) filenumber;
+
+            SaveManager.SaveManager.Reset(enumFile);
             CloseModal();
         }
     }

@@ -69,6 +69,7 @@
     <Compile Include="Assets\3rd Party\SimpleDragAndDrop\Scripts\DragAndDropItem.cs" />
     <Compile Include="Assets\3rd Party\SimpleDragAndDrop\Scripts\DummyControlUnit.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraScript.cs" />
+    <Compile Include="Assets\Scripts\Camera\Main.cs" />
     <Compile Include="Assets\Scripts\Canon\Canon.cs" />
     <Compile Include="Assets\Scripts\Canon\EnnemyCanon.cs" />
     <Compile Include="Assets\Scripts\Canon\EnumCanonState.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="Assets\Scripts\UI\InformationBox.cs" />
     <Compile Include="Assets\Scripts\UI\OptionsFillUp.cs" />
     <Compile Include="Assets\Scripts\UI\PowerFilling.cs" />
+    <Compile Include="Assets\Scripts\UI\SavedGameBox.cs" />
     <Compile Include="Assets\Scripts\WinLoseConditions.cs" />
     <Compile Include="Assets\VolumeManager.cs" />
   </ItemGroup>
