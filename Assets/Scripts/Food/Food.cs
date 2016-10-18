@@ -71,6 +71,10 @@ namespace Assets.Scripts.Food
 
                     return;
                 }
+                else if (coll.gameObject.tag == Constant.SousChef)
+                {
+                    Destroy(gameObject);
+                }
             }
         }
     }
