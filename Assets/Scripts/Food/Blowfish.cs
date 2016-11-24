@@ -18,7 +18,7 @@ namespace Assets.Scripts.Food
 
         public override string Text
         {
-            get { return "To do !!!"; }
+            get { return "This fish will blow your opponent away! Watch out for its spikes, they sting!"; }
         }
         
         public override Sprite Image
