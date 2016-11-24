@@ -15,7 +15,7 @@ namespace Assets.Scripts.Food
 
         public override string Text
         {
-            get { return "To Do !!"; }
+            get { return "Even roasted this chicken seems a bit alive, click the screen mid-flight to have it flap its wings!"; }
         }
         
         public override Sprite Image
