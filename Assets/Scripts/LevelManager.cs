@@ -101,6 +101,8 @@ namespace Assets.Scripts
 
 	    public void Level()
         {
+            PauseManager.IsPaused = false;
+
             PlaySound();
 
             LoadLevel.IsLoaded = false;

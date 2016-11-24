@@ -9,6 +9,9 @@ namespace Assets.Scripts.Food
         public abstract string Text { get; }
         public abstract Sprite Image { get; }
 
+        public AudioClip SplashSound;
+        public AudioClip BounceSound;
+
         public Vector3 OriginalAngle;
 
         public int Damage = 10;
@@ -45,31 +48,44 @@ namespace Assets.Scripts.Food
         {            
             if (IsLaunched && coll.gameObject.tag != Constant.PlatformLimiter && coll.gameObject.tag != Constant.Fragment)
             {
+                float delay = 0;
                 //bounce on the floor
                 if (coll.gameObject.tag == Constant.Floor)
                 {
                     RotationAllowed = false;
                     if (_nbOfLeaps > 0)
                     {
+                        //bounce sound
+                        var audioSource = GetComponent<AudioSource>();
+                        if (audioSource != null)
+                        {
+                            audioSource.clip = BounceSound;
+                            audioSource.volume = VolumeManager.GetSfxVolume();
+                            audioSource.Play();
+                        }
+
                         GetComponent<Rigidbody2D>().velocity = new Vector2(_leapPower, _leapPower);
                         _leapPower *= .5f;
                         _nbOfLeaps--;
                     }
                     else
                     {
+                        //splash sound
                         if (coll.gameObject.tag != Constant.Bouncy)
                         {
 							var audioSource = GetComponent<AudioSource> ();
 							if (audioSource != null) {
+                                audioSource.clip = SplashSound;
                                 audioSource.volume = VolumeManager.GetSfxVolume();
                                 audioSource.Play();
 							}
 
-                            var delay = audioSource != null && audioSource.clip != null ? audioSource.clip.length : 0;
+                            delay = audioSource != null && audioSource.clip != null ? audioSource.clip.length : 0;
 
                             Destroy(gameObject, delay);
                         }
-                        Destroy(gameObject);
+
+                        Destroy(gameObject, delay);
                     }
 
                     return;
