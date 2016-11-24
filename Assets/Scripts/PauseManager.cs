@@ -7,9 +7,29 @@ namespace Assets.Scripts
 {
 	public class PauseManager : MonoBehaviour
 	{
-		public static bool IsPaused;
+        private static bool _ispaused;
+		public static bool IsPaused {
+            get
+            {
+                return _ispaused;
+            }
 
-		public static void PauseGame() {
+            set
+            { 
+                _ispaused = value;
+
+                if (value)
+                {
+                    Time.timeScale = 0;
+                }
+                else
+                {
+                    Time.timeScale = 1;
+                }
+            }
+        }
+        
+		public static void TogglePause() {
 		    if (!LoadLevel.IsLoaded)
 		    {
 		        return;

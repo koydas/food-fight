@@ -57,8 +57,21 @@ namespace Assets.Scripts
             OpenModal(modal, true);
         }
 
+        public void OpenModalResetGame(GameObject modal)
+        {
+            OpenModal(modal, false);
+        }
+
+
+        public void OpenModalQuitGame(GameObject modal)
+        {
+            OpenModal(modal, false);
+        }
+
         public void OpenModal(GameObject modal, bool isResetData)
 	    {
+            PauseManager.IsPaused = true;
+
             PlaySound();
             
             var modalBox = Instantiate(modal);
@@ -82,7 +95,9 @@ namespace Assets.Scripts
             SetBack();
             PlaySound();
             Destroy(GameObject.Find("Modal"), BackSound.length);
-	    }
+            
+            PauseManager.IsPaused = false;
+        }
 
 	    public void Level()
         {
@@ -242,7 +257,7 @@ namespace Assets.Scripts
         }
 
 		public void PauseGame() {
-			PauseManager.PauseGame();
+			PauseManager.TogglePause();
 		}
 
         public void ResetData(int filenumber)

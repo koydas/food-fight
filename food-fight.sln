@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "food-fight.CSharp", "food-fight.CSharp.csproj", "{652D4746-3F65-0587-A575-EC1E75F8281D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "food-fight", "food-fight.csproj", "{C7C7DBE5-E047-7237-6C3E-E2453D513E56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{652D4746-3F65-0587-A575-EC1E75F8281D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{652D4746-3F65-0587-A575-EC1E75F8281D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{652D4746-3F65-0587-A575-EC1E75F8281D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{652D4746-3F65-0587-A575-EC1E75F8281D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7C7DBE5-E047-7237-6C3E-E2453D513E56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7C7DBE5-E047-7237-6C3E-E2453D513E56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7C7DBE5-E047-7237-6C3E-E2453D513E56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7C7DBE5-E047-7237-6C3E-E2453D513E56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
