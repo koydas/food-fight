@@ -20,6 +20,8 @@ namespace Assets.Scripts.Food
             get { return GetComponent<SpriteRenderer>().sprite; }
         }
 
+        public AudioClip ExplosionSound;
+
         [SerializeField]
         private bool _secondSkillDestroyObject ;
         [SerializeField]
@@ -68,6 +70,15 @@ namespace Assets.Scripts.Food
 
         public void UseSecondAbility()
         {
+            // Explosion sound
+            var audioSource = GetComponent<AudioSource>();
+            if (audioSource != null)
+            {
+                audioSource.clip = ExplosionSound;
+                audioSource.volume = VolumeManager.GetSfxVolume();
+                audioSource.Play();
+            }
+
             var yTotal = 10;
             var yDiff = yTotal / (float)NbOfFragments;
             var yStart = 10;
