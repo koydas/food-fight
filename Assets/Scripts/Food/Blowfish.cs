@@ -86,6 +86,8 @@ namespace Assets.Scripts.Food
 
                 frag.transform.SetParent(transform.parent);
                 frag.GetComponent<BlowfishFragment>().IsLaunched = true;
+
+                frag.layer = gameObject.layer;
             }
         }
         
