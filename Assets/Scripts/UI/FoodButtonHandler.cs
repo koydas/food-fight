@@ -24,6 +24,9 @@ namespace Assets.Scripts.UI
                 if (selectedFood != null)
                 {
                     foodButton.GetComponent<FoodButton>().Food = Instantiate(selectedFood);
+
+                    var pos = foodButton.GetComponent<FoodButton>().Food.gameObject.transform.position;
+                    foodButton.GetComponent<FoodButton>().Food.gameObject.transform.position = new Vector3(pos.x, pos.y, -10);
                 }
                 else
                 {
@@ -45,7 +48,7 @@ namespace Assets.Scripts.UI
                     foodButton.GetComponent<FoodButton>().IsActive = true;
                 }
 
-                //Destroy(selectedFood);
+                Destroy(selectedFood);
             }
         }
 
