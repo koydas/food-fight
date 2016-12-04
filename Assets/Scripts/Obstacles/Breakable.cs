@@ -8,6 +8,12 @@ namespace Assets.Scripts.Obstacles
 
         public void OnCollisionEnter2D(Collision2D coll)
         {
+            if (coll.gameObject.tag == Constant.Fragment)
+            {
+                Destroy(coll.gameObject);
+                return;
+            }
+
             if (NumberOfHitToBreak <= 0)
             {
                 Destroy(gameObject);
