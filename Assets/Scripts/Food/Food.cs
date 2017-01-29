@@ -8,9 +8,11 @@ namespace Assets.Scripts.Food
         public abstract string Title { get; }
         public abstract string Text { get; }
         public abstract Sprite Image { get; }
-
+        
         public AudioClip SplashSound;
         public AudioClip BounceSound;
+
+        public int UnlockLevel;
 
         public Vector3 OriginalAngle;
 

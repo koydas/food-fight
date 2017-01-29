@@ -115,6 +115,8 @@
     <Compile Include="Assets\Scripts\SelectedFoodLoader.cs" />
     <Compile Include="Assets\Scripts\UI\FoodButton.cs" />
     <Compile Include="Assets\Scripts\UI\FoodButtonHandler.cs" />
+    <Compile Include="Assets\Scripts\UI\FoodLock.cs" />
+    <Compile Include="Assets\Scripts\UI\GodMode.cs" />
     <Compile Include="Assets\Scripts\UI\InformationBox.cs" />
     <Compile Include="Assets\Scripts\UI\OptionsFillUp.cs" />
     <Compile Include="Assets\Scripts\UI\PowerFilling.cs" />
