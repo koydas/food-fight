@@ -101,6 +101,7 @@
     <Compile Include="Assets\Scripts\Food\Pomegranate.cs" />
     <Compile Include="Assets\Scripts\Food\PomegranateFragment.cs" />
     <Compile Include="Assets\Scripts\FoodSelector.cs" />
+    <Compile Include="Assets\Scripts\GameStatus.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\LoadLevel.cs" />
     <Compile Include="Assets\Scripts\Obstacles\Destroyer.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="Assets\Scripts\SelectedFoodLoader.cs" />
     <Compile Include="Assets\Scripts\UI\FoodButton.cs" />
     <Compile Include="Assets\Scripts\UI\FoodButtonHandler.cs" />
+    <Compile Include="Assets\Scripts\UI\LevelLock.cs" />
     <Compile Include="Assets\Scripts\UI\FoodLock.cs" />
     <Compile Include="Assets\Scripts\UI\GodMode.cs" />
     <Compile Include="Assets\Scripts\UI\InformationBox.cs" />

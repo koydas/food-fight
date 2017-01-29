@@ -14,7 +14,7 @@ namespace Assets.Scripts.UI
             var button = GameObject.Find("unlock-all button");
             var buttonChild = button.transform.GetChild(0);
             var buttonText = buttonChild.GetComponent<Text>();
-            
+
             if (buttonText.text == "Unlock All")
             {
                 unlock = true;
@@ -32,6 +32,37 @@ namespace Assets.Scripts.UI
             {
                 lockedFood.GetComponent<DragAndDropCell>().enabled = unlock;
                 lockedFood.transform.GetChild(1).gameObject.SetActive(!unlock);
+            }
+
+            buttonText.text = newButtonText;
+        }
+
+        public void UnlockAllLevels()
+        {
+            bool unlock;
+            string newButtonText;
+
+            var button = GameObject.Find("Unlock all levels");
+            var buttonChild = button.transform.GetChild(0);
+            var buttonText = buttonChild.GetComponent<Text>();
+
+            if (buttonText.text == "Unlock All")
+            {
+                unlock = true;
+                newButtonText = "Lock All";
+            }
+            else
+            {
+                unlock = false;
+                newButtonText = "Unlock All";
+            }
+
+            var allLockedLevels = FindObjectsOfType<LevelLock>();
+
+            foreach (var lockedLevel in allLockedLevels)
+            {
+                lockedLevel.GetComponent<Button>().enabled = unlock;
+                lockedLevel.transform.GetChild(1).gameObject.SetActive(!unlock);
             }
 
             buttonText.text = newButtonText;

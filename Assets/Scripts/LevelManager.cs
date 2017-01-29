@@ -210,7 +210,12 @@ namespace Assets.Scripts
 
 		public void WinScreen()
 		{
-			SceneManager.LoadScene("Win");
+		    if (GameStatus.MaxCompletedLevel+1 == FoodSelector.LevelLoaded)
+		    {
+		        GameStatus.MaxCompletedLevel++;
+		    }
+
+            SceneManager.LoadScene("Win");
 		}
 
 		public void LoseScreen()

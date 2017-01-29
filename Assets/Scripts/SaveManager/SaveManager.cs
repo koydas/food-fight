@@ -31,7 +31,7 @@ namespace Assets.Scripts.SaveManager
             {
                 SelectedFoods = selectedFoods.Where(x => x != null).Select(x => x.name).ToArray(),
                 NbOfStars = 0,
-                NbOfLevelsUnlocked = 0
+                MaxLevelCompleted = GameStatus.MaxCompletedLevel
             };
 
             bf.Serialize(file, savedGame);
@@ -77,6 +77,8 @@ namespace Assets.Scripts.SaveManager
                 }
 
                 file.Close();
+
+                GameStatus.MaxCompletedLevel = Saves[enumFile].MaxLevelCompleted;
             }
         }
 
