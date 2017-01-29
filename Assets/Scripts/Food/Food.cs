@@ -11,9 +11,7 @@ namespace Assets.Scripts.Food
         
         public AudioClip SplashSound;
         public AudioClip BounceSound;
-
-        public int UnlockLevel;
-
+        
         public Vector3 OriginalAngle;
 
         public int Damage = 10;

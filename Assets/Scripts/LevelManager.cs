@@ -215,6 +215,8 @@ namespace Assets.Scripts
 		        GameStatus.MaxCompletedLevel++;
 		    }
 
+            SaveManager.SaveManager.Save(SaveManager.SaveManager.CurrentSavedGameEnumFile);
+
             SceneManager.LoadScene("Win");
 		}
 

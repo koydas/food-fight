@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Assets.Scripts.SaveManager;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.UI
 {
@@ -8,7 +9,13 @@ namespace Assets.Scripts.UI
     {
         public EnumFile EnumFile = EnumFile.None;
         private SavedGame _savedGame;
-	
+
+        void Start()
+        {
+            // todo set the max level completed
+            
+        }
+
         // Update is called once per frame
         void Update ()
         {
@@ -17,6 +24,7 @@ namespace Assets.Scripts.UI
             if (EnumFile != EnumFile.None && savedGames.ContainsKey(EnumFile))
             {
                 _savedGame = savedGames.Single(x => x.Key == EnumFile).Value;
+                gameObject.transform.GetChild(1).transform.GetChild(0).GetComponent<Text>().text = _savedGame.MaxLevelCompleted.ToString();
             }
             else
             {

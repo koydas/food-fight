@@ -5,10 +5,19 @@ namespace Assets.Scripts.UI
 {
     class FoodLock : MonoBehaviour
     {
+        public int UnlockedLevel;
         void Start()
         {
-            // TODO check for unlocked levels to see if the food is unlocked
-            gameObject.GetComponent<DragAndDropCell>().enabled = false;
+            if (UnlockedLevel > GameStatus.MaxCompletedLevel + 1)
+            {
+                gameObject.GetComponent<DragAndDropCell>().enabled = false;
+                gameObject.transform.GetChild(1).gameObject.SetActive(true);
+            }
+            else
+            {
+                gameObject.GetComponent<DragAndDropCell>().enabled = true;
+                gameObject.transform.GetChild(1).gameObject.SetActive(false);
+            }
         }
     }
 }
