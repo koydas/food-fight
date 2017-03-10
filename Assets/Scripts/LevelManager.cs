@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Assets.Scripts.SaveManager;
 using Assets.Scripts.UI;
 using UnityEngine;
@@ -12,6 +13,10 @@ namespace Assets.Scripts
 	    public bool? IsForward;
 	    public AudioClip ForwardSound;
 	    public AudioClip BackSound;
+
+	    public int ThreeStars = 20;
+	    public int TwoStars = 10;
+	    public int OneStar = 7;
 
 	    private int _resetDataFileNumber;
 

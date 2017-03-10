@@ -27,10 +27,12 @@ namespace Assets.Scripts.SaveManager
             var file = File.Create(string.Format("{0}/{1}", Application.persistentDataPath, enumFile));
 
             var selectedFoods = FoodSelector.SelectedFoods;
+            var nbOfStars = CurrentSavedGame.NbOfStars;
+
             var savedGame = new SavedGame
             {
                 SelectedFoods = selectedFoods.Where(x => x != null).Select(x => x.name).ToArray(),
-                NbOfStars = 0,
+                NbOfStars = nbOfStars,
                 MaxLevelCompleted = GameStatus.MaxCompletedLevel
             };
 
