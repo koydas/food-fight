@@ -107,15 +107,18 @@ namespace Assets.Scripts.SaveManager
             {
                 BinaryFormatter bf = new BinaryFormatter();
                 FileStream file = File.Open(filePath, FileMode.Open);
-                var savedData = (SavedOptions)bf.Deserialize(file);
+                var savedData = bf.Deserialize(file) as SavedOptions;
 
                 SavedOptions = savedData;
                 
                 file.Close();
 
-                VolumeManager.Master = SavedOptions.MasterSound;
-                VolumeManager.Sfx = SavedOptions.SfxSound;
-                VolumeManager.Music = SavedOptions.MusicSound;
+                if (SavedOptions != null)
+                {
+                    VolumeManager.Master = SavedOptions.MasterSound;
+                    VolumeManager.Sfx = SavedOptions.SfxSound;
+                    VolumeManager.Music = SavedOptions.MusicSound;
+                }
             }
         }
 
