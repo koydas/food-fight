@@ -9,14 +9,15 @@ namespace Assets.Scripts.UI
         public int Level;
         void Start()
         {
-            if (Level > GameStatus.MaxCompletedLevel+1)
+            var maxCompletedLevel = GameStatus.MaxCompletedLevel + 1;
+            if (Level > maxCompletedLevel)
             {
                 gameObject.GetComponent<Button>().enabled = false;
             }
             else
             {
                 gameObject.GetComponent<Button>().enabled = true;
-                gameObject.transform.GetChild(1).gameObject.SetActive(false);
+                gameObject.transform.GetChild(2).gameObject.SetActive(false);
             }
         }
     }
