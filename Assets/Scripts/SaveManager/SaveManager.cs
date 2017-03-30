@@ -19,6 +19,7 @@ namespace Assets.Scripts.SaveManager
         {
             CurrentSavedGameEnumFile = enumFile;
             CurrentSavedGame = Saves.ContainsKey(enumFile) ? Saves[enumFile] : new SavedGame();
+            GameStatus.MaxCompletedLevel = CurrentSavedGame.MaxLevelCompleted;
         }
 
         public static void Save(EnumFile enumFile)
