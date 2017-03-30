@@ -64,7 +64,9 @@ namespace Assets.Scripts.Food
                             audioSource.Play();
                         }
 
-                        GetComponent<Rigidbody2D>().velocity = new Vector2(_leapPower, _leapPower);
+                        GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 0); // set y velocity to zero
+                        GetComponent<Rigidbody2D>().AddForce(new Vector2(0, _leapPower)); // some constant force here
+                        
                         _leapPower *= .5f;
                         _nbOfLeaps--;
                     }
