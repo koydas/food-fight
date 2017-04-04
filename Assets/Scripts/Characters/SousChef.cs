@@ -14,8 +14,8 @@ namespace Assets.Scripts.Characters
         [SerializeField]
         public int MaxHealth = 100;
 
-        
-        public float CurrentHealth;
+        [SerializeField]
+        public float CurrentHealth = 100;
 
         [HideInInspector]
         public float DotDamagePerTick;
@@ -89,6 +89,10 @@ namespace Assets.Scripts.Characters
 
         private void ChangeDirection()
         {
+            var healthbar = transform.GetChild(0);
+            var healthbarScale = healthbar.localScale;
+            healthbar.localScale = new Vector3(healthbarScale.x * -1, healthbarScale.y, healthbarScale.z);
+
             var currentScale = transform.localScale;
             transform.localScale = new Vector3(currentScale.x * -1, currentScale.y, currentScale.z);
             _currentDirection = _currentDirection == EnumDirection.Right ? EnumDirection.Left : EnumDirection.Right;
@@ -105,7 +109,7 @@ namespace Assets.Scripts.Characters
 
             if ((coll.gameObject.tag.Equals(Constant.PlatformDropper) || coll.gameObject.tag.Equals(Constant.PlatformLifter)) && (platformSettings.DirectionLimited == EnumDirection.All || platformSettings.DirectionLimited == _currentDirection))
             {
-                transform.position = new Vector3(transform.position.x, platformSettings.LifterOrDropperTarget.transform.position.y, transform.position.z);
+                transform.position = new Vector3(transform.position.x, platformSettings.LifterOrDropperTarget.transform.position.y + platformSettings.LifterOrDropperTarget.transform.localScale.y/2, transform.position.z);
 
                 if (platformSettings.ChangeDirection)
                 {
